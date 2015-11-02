@@ -62,6 +62,7 @@ public class TestAlphaCiv {
 
     @Test
     public void redWinsIn300BC() throws Exception {
-
+        assertThat("Age is 3000", game.getAge(), is(3000));
+        assertThat("red wins", game.getWinner(), is(Player.RED));
     }
 }
