@@ -57,6 +57,11 @@ public class TestAlphaCiv {
     public void shouldHaveOceanAt1_0() throws Exception {
         Tile tile = game.getTileAt(new Position(1,0));
         String tileType = tile.getTypeString();
-        assertThat("There should be ocean at (1,0)", tileType, is("Ocean"));
+        assertThat("There should be ocean at (1,0)", tileType, is("ocean"));
+    }
+
+    @Test
+    public void redWinsIn300BC() throws Exception {
+
     }
 }

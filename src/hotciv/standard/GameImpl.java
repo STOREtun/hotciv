@@ -30,9 +30,13 @@ import hotciv.framework.*;
 */
 
 public class GameImpl implements Game {
-    //Create city instace
+    //Create city instance
     public CityImple city1 = new CityImple(Player.RED);
-    public Tile getTileAt( Position p ) { return null; }
+
+    //Create tile instance
+    public TileImple tile1 = new TileImple("ocean");
+
+    public Tile getTileAt( Position p ) { return tile1; }
     public Unit getUnitAt( Position p ) { return null; }
     public City getCityAt( Position p ) { return city1; }
     public Player getPlayerInTurn() { return null; }
