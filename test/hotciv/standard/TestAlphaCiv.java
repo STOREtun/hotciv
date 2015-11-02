@@ -56,13 +56,12 @@ public class TestAlphaCiv {
     @Test
     public void shouldHaveOceanAt1_0() throws Exception {
         Tile tile = game.getTileAt(new Position(1,0));
-        String tileType = tile.getTypeString();
-        assertThat("There should be ocean at (1,0)", tileType, is("ocean"));
+        assertThat("There should be ocean at (1,0)", tile.getTypeString(), is("ocean"));
     }
 
     @Test
-    public void redWinsIn300BC() throws Exception {
-        assertThat("Age is 3000", game.getAge(), is(3000));
+    public void redShouldWinIn300BC() throws Exception {
+        assertThat("Age should be 3000", game.getAge(), is(3000));
         assertThat("red wins", game.getWinner(), is(Player.RED));
     }
 }
