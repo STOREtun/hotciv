@@ -68,9 +68,10 @@ public class GameImpl implements Game {
     public boolean moveUnit( Position from, Position to ) {
         return false;
     }
-    
+
     public void endOfTurn() {
         if(currentInTurnPlayer == Player.BLUE){
+            city1.incrementProductionPoints();
             currentInTurnPlayer = Player.RED;
         }else currentInTurnPlayer = Player.BLUE;
     }
@@ -86,4 +87,6 @@ public class GameImpl implements Game {
     public void performUnitActionAt( Position p ) {
 
     }
+
+
 }

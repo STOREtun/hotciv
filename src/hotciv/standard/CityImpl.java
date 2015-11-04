@@ -8,10 +8,14 @@ import hotciv.framework.Player;
  */
 public class CityImpl implements City{
 
-    public Player owner;
+    private Player owner;
+    private String production;
+    private int productionPoints;
+
 
     public CityImpl(Player _owner) {
         this.owner = _owner;
+        this.productionPoints = 0;
     }
 
     @Override
@@ -26,11 +30,19 @@ public class CityImpl implements City{
 
     @Override
     public String getProduction() {
-        return null;
+        return production;
     }
 
     @Override
     public String getWorkforceFocus() {
         return null;
     }
+
+    public int getProductionPoints(){
+        return productionPoints;
+    }
+
+    public void incrementProductionPoints(){
+        productionPoints += 6;
+     }
 }

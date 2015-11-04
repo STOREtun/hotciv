@@ -39,7 +39,7 @@ public class TestAlphaCiv {
     /** Fixture for alphaciv testing. */
     @Before
     public void setUp() {
-    game = new GameImpl();
+        game = new GameImpl();
     }
 
     @Test
@@ -60,13 +60,13 @@ public class TestAlphaCiv {
     }
 
     @Test
-    public void redShouldWinIn300BC() {
+    public void shouldLetRedWinIn300BC() {
         assertThat("Age should be 3000", game.getAge(), is(3000));
         assertThat("red wins", game.getWinner(), is(Player.RED));
     }
 
     @Test
-    public void cityPopulationShouldAlwaysBeOne() {
+    public void shouldAlwaysHaveCityPopulationOf1() {
         assertThat("City population should always be one", game.getCityAt(new Position(1,1)).getSize(), is(1));
     }
 
@@ -76,4 +76,13 @@ public class TestAlphaCiv {
         game.endOfTurn();
         assertThat("It is blue's turn after reds end of turn", game.getPlayerInTurn(), is(Player.BLUE));
     }
+
+    @Test
+    public void shouldProduceSixProductionAfterIncrement() {
+        CityImpl city1 = new CityImpl(Player.RED);
+        assertThat("City production should be 0 at game start", city1.getProductionPoints(), is(0));
+        city1.incrementProductionPoints();
+        assertThat("City should produce six production after round end",city1.getProductionPoints(), is(6));
+    }
+
 }
