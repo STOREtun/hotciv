@@ -1,17 +1,19 @@
 AlphaCiv
 [x] Red is the first player in turn
 [x] Red’s city is at (1,1)
-[x] there is ocean at (1,0)
-[] should handle more than two players
-[] units cannot move over mountain
-[] Red cannot move Blue’s units
-[] new round starts after blue end of turn
-[x] cities' production should be 0 at game start
-[] cities produce 6 ‘production’ after a round has ended
+[x] there is ocean at (0,1)
+[x] game age should advance 100 years each round
 [x] Unit test on city of 'production' will increment 6
 [x] cities’ population size is always 1
 [x] after Red it is Blue that is in turn
 [x] Red wins in year 3000 BC
+[x] cities' production should be 0 at game start
+[] units cannot move over mountain
+[] Red cannot move Blue’s units
+[] new round starts after blue end of turn	
+[] cities produce 6 ‘production’ after a round has ended
 [] Red’s unit attack and destroy Blue’s unit
 
 ----
+
+Instruktor mail: johanbay@gmail.com
