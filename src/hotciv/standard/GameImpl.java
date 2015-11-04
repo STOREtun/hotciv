@@ -33,7 +33,9 @@ import java.util.List;
 */
 
 public class GameImpl implements Game {
-    Player currentInTurnPlayer = Player.RED;
+    private Player currentInTurnPlayer = Player.RED;
+
+    private int worldAge = 3000;
 
     //Create city instance
     public CityImpl city1 = new CityImpl(Player.RED);
@@ -62,7 +64,7 @@ public class GameImpl implements Game {
     }
 
     public int getAge() {
-        return 3000;
+        return worldAge;
     }
 
     public boolean moveUnit( Position from, Position to ) {
@@ -71,7 +73,7 @@ public class GameImpl implements Game {
 
     public void endOfTurn() {
         if(currentInTurnPlayer == Player.BLUE){
-            city1.incrementProductionPoints();
+            configureNewRound();
             currentInTurnPlayer = Player.RED;
         }else currentInTurnPlayer = Player.BLUE;
     }
@@ -88,5 +90,8 @@ public class GameImpl implements Game {
 
     }
 
-
+    public void configureNewRound(){
+        city1.incrementProductionPoints();
+        worldAge += 100;
+    }
 }
