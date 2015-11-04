@@ -33,7 +33,7 @@ import java.util.List;
 */
 
 public class GameImpl implements Game {
-    Player currentInTurnPlayer;
+    Player currentInTurnPlayer = Player.RED;
 
     //Create city instance
     public CityImpl city1 = new CityImpl(Player.RED);
@@ -54,10 +54,6 @@ public class GameImpl implements Game {
     }
 
     public Player getPlayerInTurn() {
-        if(currentInTurnPlayer == Player.BLUE || currentInTurnPlayer == null){
-            currentInTurnPlayer = Player.RED;
-        }else currentInTurnPlayer = Player.BLUE;
-
         return currentInTurnPlayer;
     }
 
@@ -72,8 +68,11 @@ public class GameImpl implements Game {
     public boolean moveUnit( Position from, Position to ) {
         return false;
     }
+    
     public void endOfTurn() {
-
+        if(currentInTurnPlayer == Player.BLUE){
+            currentInTurnPlayer = Player.RED;
+        }else currentInTurnPlayer = Player.BLUE;
     }
 
     public void changeWorkForceFocusInCityAt( Position p, String balance ) {
