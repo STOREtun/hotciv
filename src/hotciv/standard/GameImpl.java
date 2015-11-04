@@ -31,10 +31,10 @@ import hotciv.framework.*;
 
 public class GameImpl implements Game {
     //Create city instance
-    public CityImple city1 = new CityImple(Player.RED);
+    public CityImpl city1 = new CityImpl(Player.RED);
 
     //Create tile instance
-    public TileImple tile1 = new TileImple("ocean");
+    public TileImpl tile1 = new TileImpl("ocean");
 
     public Tile getTileAt( Position p ) { return tile1; }
     public Unit getUnitAt( Position p ) { return null; }

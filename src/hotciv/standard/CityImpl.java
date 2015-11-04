@@ -6,11 +6,11 @@ import hotciv.framework.Player;
 /**
  * Created by sditlev on 02/11/15.
  */
-public class CityImple implements City{
+public class CityImpl implements City{
 
     public Player owner;
 
-    public CityImple(Player _owner) {
+    public CityImpl(Player _owner) {
         this.owner = _owner;
     }
 
