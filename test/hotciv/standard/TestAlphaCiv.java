@@ -54,9 +54,9 @@ public class TestAlphaCiv {
     }
 
     @Test
-    public void shouldHaveOceanAt1_0() {
-        Tile tile = game.getTileAt(new Position(1,0));
-        assertThat("There should be ocean at (1,0)", tile.getTypeString(), is("ocean"));
+    public void shouldHaveOceanAt0_1() {
+        Tile tile = game.getTileAt(new Position(0,1));
+        assertThat("There should be ocean at (0,1)", tile.getTypeString(), is("ocean"));
     }
 
     @Test
@@ -85,4 +85,12 @@ public class TestAlphaCiv {
         assertThat("City should produce six production after round end",city1.getProductionPoints(), is(6));
     }
 
+
+    @Test
+    public void shouldIncrementWorldAgeAfterEachRound() {
+        assertThat("World age is 3000", game.getAge(), is(3000));
+        game.endOfTurn();
+        game.endOfTurn();
+        assertThat("World age is 3100", game.getAge(), is(3100));
+    }
 }
