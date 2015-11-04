@@ -54,14 +54,26 @@ public class TestAlphaCiv {
     }
 
     @Test
-    public void shouldHaveOceanAt1_0() throws Exception {
+    public void shouldHaveOceanAt1_0() {
         Tile tile = game.getTileAt(new Position(1,0));
         assertThat("There should be ocean at (1,0)", tile.getTypeString(), is("ocean"));
     }
 
     @Test
-    public void redShouldWinIn300BC() throws Exception {
+    public void redShouldWinIn300BC() {
         assertThat("Age should be 3000", game.getAge(), is(3000));
         assertThat("red wins", game.getWinner(), is(Player.RED));
+    }
+
+    @Test
+    public void cityPopulationShouldAlwaysBeOne() {
+        assertThat("City population should always be one", game.getCityAt(new Position(1,1)).getSize(), is(1));
+    }
+
+    @Test
+    public void shouldSwitchTurnFromRedToBlue() {
+        assertThat("It is red's turn first", game.getPlayerInTurn(), is(Player.RED));
+        game.endOfTurn();
+        assertThat("It is blue's turn after reds end of turn", game.getPlayerInTurn(), is(Player.BLUE));
     }
 }

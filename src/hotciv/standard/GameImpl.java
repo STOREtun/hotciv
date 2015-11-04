@@ -2,6 +2,9 @@ package hotciv.standard;
 
 import hotciv.framework.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /** Skeleton implementation of HotCiv.
  
    This source code is from the book 
@@ -30,23 +33,58 @@ import hotciv.framework.*;
 */
 
 public class GameImpl implements Game {
+    Player currentInTurnPlayer;
+
     //Create city instance
     public CityImpl city1 = new CityImpl(Player.RED);
 
     //Create tile instance
     public TileImpl tile1 = new TileImpl("ocean");
 
-    public Tile getTileAt( Position p ) { return tile1; }
-    public Unit getUnitAt( Position p ) { return null; }
-    public City getCityAt( Position p ) { return city1; }
-    public Player getPlayerInTurn() { return null; }
-    public Player getWinner() { return null; }
-    public int getAge() { return 0; }
-    public boolean moveUnit( Position from, Position to ) {
-    return false;
+    public Tile getTileAt( Position p ) {
+        return tile1;
     }
-    public void endOfTurn() {}
-    public void changeWorkForceFocusInCityAt( Position p, String balance ) {}
-    public void changeProductionInCityAt( Position p, String unitType ) {}
-    public void performUnitActionAt( Position p ) {}
+
+    public Unit getUnitAt( Position p ) {
+        return null;
+    }
+
+    public City getCityAt( Position p ) {
+        return city1;
+    }
+
+    public Player getPlayerInTurn() {
+        if(currentInTurnPlayer == Player.BLUE || currentInTurnPlayer == null){
+            currentInTurnPlayer = Player.RED;
+        }else currentInTurnPlayer = Player.BLUE;
+
+        return currentInTurnPlayer;
+    }
+
+    public Player getWinner() {
+        return Player.RED;
+    }
+
+    public int getAge() {
+        return 3000;
+    }
+
+    public boolean moveUnit( Position from, Position to ) {
+        return false;
+    }
+    public void endOfTurn() {
+
+    }
+
+    public void changeWorkForceFocusInCityAt( Position p, String balance ) {
+
+    }
+
+    public void changeProductionInCityAt( Position p, String unitType ) {
+
+    }
+
+    public void performUnitActionAt( Position p ) {
+
+    }
 }
