@@ -1,14 +1,14 @@
 Testsuite: hotciv.standard.TestAlphaCiv
-Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.019 sec
+Tests run: 11, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.039 sec
 
-Testcase: shouldHaveRedCityAt1_1 took 0.006 sec
-	FAILED
-There should be a city at (1,1)
-Expected: is not null
-     but: was null
-junit.framework.AssertionFailedError: There should be a city at (1,1)
-Expected: is not null
-     but: was null
-	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)
-	at hotciv.standard.TestAlphaCiv.shouldHaveRedCityAt1_1(TestAlphaCiv.java:48)
-
+Testcase: shouldAlwaysHaveCityPopulationOf1 took 0.01 sec
+Testcase: shouldStartGameAtAge4000BC took 0 sec
+Testcase: shouldHaveHillsAt1_0 took 0 sec
+Testcase: shouldHaveMountainAt2_2 took 0 sec
+Testcase: shouldHaveOceanAt0_1 took 0 sec
+Testcase: shouldProduceSixProductionAfterIncrement took 0 sec
+Testcase: shouldHaveRedCityAt1_1 took 0.001 sec
+Testcase: shouldSwitchTurnFromRedToBlue took 0 sec
+Testcase: shouldLetRedWinIn300BC took 0 sec
+Testcase: shouldIncrementWorldAgeAfterEachRound took 0 sec
+Testcase: shouldHavePlainsEverywhereBut2_2And1_0And0_1 took 0.005 sec

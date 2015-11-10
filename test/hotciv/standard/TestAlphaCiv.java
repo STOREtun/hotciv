@@ -111,6 +111,11 @@ public class TestAlphaCiv {
     }
 
     @Test
+    public void shouldStartGameAtAge4000BC() {
+        assertThat("age should be -4000 in start of game", game.getAge(), is(-4000));
+    }
+
+    @Test
     public void shouldHavePlainsEverywhereBut2_2And1_0And0_1() {
         for (int row = GameConstants.WORLDSIZE-1; row >= 0; row--){
             for (int column = GameConstants.WORLDSIZE-1; column >= 0; column--) {
