@@ -1,9 +1,8 @@
 package hotciv.standard;
 
 import hotciv.framework.*;
-
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 /** Skeleton implementation of HotCiv.
  
@@ -35,16 +34,38 @@ import java.util.List;
 public class GameImpl implements Game {
     private Player currentInTurnPlayer = Player.RED;
 
+    private Map<Position, TileImpl> positionTileHashMap = new HashMap<Position, TileImpl>();
+    private boolean mapCreated = false;
+
     private int worldAge = 3000;
 
     //Create city instance
     public CityImpl city1 = new CityImpl(Player.RED);
 
-    //Create tile instance
-    public TileImpl tile1 = new TileImpl("ocean");
+    //Create tile instances
+    public TileImpl tile1 = new TileImpl(GameConstants.OCEANS);
+    public TileImpl tile2 = new TileImpl(GameConstants.HILLS);
+    public TileImpl tile3 = new TileImpl(GameConstants.MOUNTAINS);
+
+    public void initTileMap(){
+        positionTileHashMap.put(new Position(0,1), tile1);
+        positionTileHashMap.put(new Position(1,0), tile2);
+        positionTileHashMap.put(new Position(2,2), tile3);
+    }
 
     public Tile getTileAt( Position p ) {
-        return tile1;
+        //If hashmap  hasn't been created a new one is initialized
+        if (!mapCreated) {
+            initTileMap();
+            mapCreated = true;
+        }
+        //Check if tile is in the hashmap positionTileHashMap
+        //If not, we know it will be a plain since every other tile are plains
+        if(positionTileHashMap.containsKey(p)) {
+            return positionTileHashMap.get(p);
+        }else {
+            return new TileImpl(GameConstants.PLAINS);
+        }
     }
 
     public Unit getUnitAt( Position p ) {

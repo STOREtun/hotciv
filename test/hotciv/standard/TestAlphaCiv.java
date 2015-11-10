@@ -56,7 +56,19 @@ public class TestAlphaCiv {
     @Test
     public void shouldHaveOceanAt0_1() {
         Tile tile = game.getTileAt(new Position(0,1));
-        assertThat("There should be ocean at (0,1)", tile.getTypeString(), is("ocean"));
+        assertThat("There should be ocean at (0,1)", tile.getTypeString(), is(GameConstants.OCEANS));
+    }
+
+    @Test
+    public void shouldHaveHillsAt1_0() {
+        Tile tile = game.getTileAt(new Position(1,0));
+        assertThat("There should be hills at (1,0)", tile.getTypeString(), is(GameConstants.HILLS));
+    }
+
+    @Test
+    public void shouldHaveMountainAt2_2() {
+        Tile tile = game.getTileAt(new Position(2,2));
+        assertThat("There should be mountain at (2,2)", tile.getTypeString(), is(GameConstants.MOUNTAINS));
     }
 
     @Test
@@ -85,12 +97,23 @@ public class TestAlphaCiv {
         assertThat("City should produce six production after round end",city1.getProductionPoints(), is(6));
     }
 
-
     @Test
     public void shouldIncrementWorldAgeAfterEachRound() {
         assertThat("World age is 3000", game.getAge(), is(3000));
         game.endOfTurn();
         game.endOfTurn();
         assertThat("World age is 3100", game.getAge(), is(3100));
+    }
+
+    @Test
+    public void shouldHavePlainsEverywhereBut2_2And1_0And0_1() {
+        for (int row = GameConstants.WORLDSIZE-1; row >= 0; row--){
+            for (int column = GameConstants.WORLDSIZE-1; column >= 0; column--) {
+                if (!(row == 1 && column == 0 || row == 2 && column == 2 || row == 0 && column == 1)){
+                    assertThat(" There should be plains at (" + row + "," + column + ")", game.getTileAt(new Position(row, column)).getTypeString(), is(GameConstants.PLAINS));
+                }
+            }
+        }
+
     }
 }
