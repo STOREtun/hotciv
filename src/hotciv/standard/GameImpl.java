@@ -33,20 +33,28 @@ import java.util.Map;
 
 public class GameImpl implements Game {
     private Player currentInTurnPlayer;
-    private Map<Position, TileImpl> positionTileHashMap = new HashMap<Position, TileImpl>();
-
-    private int worldAge = 3000;
+    private int worldAge;
+    private Map<Position, TileImpl> positionTileHashMap;
 
     //Create city instance
-    public CityImpl city1 = new CityImpl(Player.RED);
+    private CityImpl city1;
 
     //Create tile instances
-    public TileImpl tile1 = new TileImpl(GameConstants.OCEANS);
-    public TileImpl tile2 = new TileImpl(GameConstants.HILLS);
-    public TileImpl tile3 = new TileImpl(GameConstants.MOUNTAINS);
+    private TileImpl tile1;
+    private TileImpl tile2;
+    private TileImpl tile3;
 
     public GameImpl(){
         currentInTurnPlayer = Player.RED;
+        worldAge = 3000;
+
+        //Create city and special tiles
+        city1 = new CityImpl(Player.RED);
+        tile1 = new TileImpl(GameConstants.OCEANS);
+        tile2 = new TileImpl(GameConstants.HILLS);
+        tile3 = new TileImpl(GameConstants.MOUNTAINS);
+        
+        positionTileHashMap = new HashMap<Position, TileImpl>();
         initTileMap();
     }
 
