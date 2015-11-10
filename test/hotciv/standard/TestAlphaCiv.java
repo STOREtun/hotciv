@@ -73,6 +73,11 @@ public class TestAlphaCiv {
 
     @Test
     public void shouldLetRedWinIn300BC() {
+        //Emulate 70 rounds
+        for (int i = 0; i < 10*7; i++) {
+            game.endOfTurn();
+            game.endOfTurn();
+        }
         assertThat("Age should be 3000", game.getAge(), is(3000));
         assertThat("red wins", game.getWinner(), is(Player.RED));
     }
@@ -99,10 +104,10 @@ public class TestAlphaCiv {
 
     @Test
     public void shouldIncrementWorldAgeAfterEachRound() {
-        assertThat("World age is 3000", game.getAge(), is(3000));
+        int age = game.getAge();
         game.endOfTurn();
         game.endOfTurn();
-        assertThat("World age is 3100", game.getAge(), is(3100));
+        assertThat("World age is 3100", game.getAge(), is(age+100));
     }
 
     @Test

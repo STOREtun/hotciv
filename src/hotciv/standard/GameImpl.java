@@ -46,14 +46,14 @@ public class GameImpl implements Game {
 
     public GameImpl(){
         currentInTurnPlayer = Player.RED;
-        worldAge = 3000;
+        worldAge = -4000;
 
         //Create city and special tiles
         city1 = new CityImpl(Player.RED);
         tile1 = new TileImpl(GameConstants.OCEANS);
         tile2 = new TileImpl(GameConstants.HILLS);
         tile3 = new TileImpl(GameConstants.MOUNTAINS);
-        
+
         positionTileHashMap = new HashMap<Position, TileImpl>();
         initTileMap();
     }
