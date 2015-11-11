@@ -124,6 +124,13 @@ public class TestAlphaCiv {
                 }
             }
         }
+    }
 
+    @Test
+    public void shouldHaveBlueCityAt4_1() {
+        City city = game.getCityAt(new Position(4,1));
+        assertThat("Should be a city", city, is(notNullValue()));
+        Player owner = city.getOwner();
+        assertThat("owner should be blue", owner, is(Player.BLUE));
     }
 }

@@ -38,6 +38,7 @@ public class GameImpl implements Game {
 
     //Create city instance
     private CityImpl city1;
+    private CityImpl city2;
 
     //Create tile instances
     private TileImpl tile1;
@@ -50,6 +51,8 @@ public class GameImpl implements Game {
 
         //Create city and special tiles
         city1 = new CityImpl(Player.RED);
+        city2 = new CityImpl(Player.BLUE);
+
         tile1 = new TileImpl(GameConstants.OCEANS);
         tile2 = new TileImpl(GameConstants.HILLS);
         tile3 = new TileImpl(GameConstants.MOUNTAINS);
@@ -73,7 +76,9 @@ public class GameImpl implements Game {
     }
 
     public City getCityAt( Position p ) {
-        return city1;
+        if (p.equals(new Position(4,1))){
+            return city2;
+        } else return city1;
     }
 
     public Player getPlayerInTurn() {
