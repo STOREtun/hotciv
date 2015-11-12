@@ -1,4 +1,5 @@
-AlphaCiv
+AlphaCiv Testlist Group 1 Class 1
+Søren Ditlev, Asger Rasmussen, Thomas Fly
 [x] Red is the first player in turn
 [x] Red’s city is at (1,1)
 [x] there is ocean at (0,1)
@@ -10,9 +11,13 @@ AlphaCiv
 [x] Red wins in year 3000 BC
 [x] cities' production should be 0 at game start
 [x] plains everywhere but (2,2), (1,0), (0,1)
-[] units cannot move over mountain
+[x] Red initially has unit type archer at (2,0)
+[x] blue initially has unit type legion at (3,2) 
+[x] Blue should have city at 4,1
 [] Red cannot move Blue’s units
-[] new round starts after blue end of turn	
+[] Blue cannot move reds unit
+[] units cannot move over mountain
+[] new round starts after blue end of turn
 [] cities produce 6 ‘production’ after a round has ended
 [] Red’s unit attack and destroy Blue’s unit
 

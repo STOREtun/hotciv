@@ -32,47 +32,60 @@ import java.util.Map;
 */
 
 public class GameImpl implements Game {
-    private Player currentInTurnPlayer;
+    //game variables
+    private Player currentPlayerInTurn;
     private int worldAge;
-    private Map<Position, TileImpl> positionTileHashMap;
-
+    //Maps
+    private Map<Position, TileImpl> positionTileMap;
+    private Map<Position, UnitImpl> positionUnitMap;
     //Create city instance
     private CityImpl city1;
     private CityImpl city2;
-
     //Create tile instances
     private TileImpl tile1;
     private TileImpl tile2;
     private TileImpl tile3;
+    //Create unit instances
+    private UnitImpl redUnit1;
+    private UnitImpl blueUnit2;
 
     public GameImpl(){
-        currentInTurnPlayer = Player.RED;
+        currentPlayerInTurn = Player.RED;
         worldAge = -4000;
-
-        //Create city and special tiles
+        //Create cities
         city1 = new CityImpl(Player.RED);
         city2 = new CityImpl(Player.BLUE);
-
+        //Create tiles
         tile1 = new TileImpl(GameConstants.OCEANS);
         tile2 = new TileImpl(GameConstants.HILLS);
         tile3 = new TileImpl(GameConstants.MOUNTAINS);
-
-        positionTileHashMap = new HashMap<Position, TileImpl>();
-        initTileMap();
+        //Create units
+        redUnit1 = new UnitImpl(Player.RED, GameConstants.ARCHER);
+        blueUnit2 = new UnitImpl(Player.BLUE, GameConstants.LEGION);
+        //Create hash maps of tiles and units
+        positionTileMap = new HashMap<Position, TileImpl>();
+        positionUnitMap = new HashMap<Position, UnitImpl>();
+        //Add tile to tile map
+        positionTileMap.put(new Position(0, 1), tile1);
+        positionTileMap.put(new Position(1, 0), tile2);
+        positionTileMap.put(new Position(2, 2), tile3);
+        //add units to unit map
+        positionUnitMap.put(new Position(2,0), redUnit1);
+        positionUnitMap.put(new Position(3,2), blueUnit2);
     }
 
     public Tile getTileAt( Position p ) {
-        //Check if tile is in the hashmap positionTileHashMap
-        //If not, we know it will be a plain since every other tile are plains
-        if(positionTileHashMap.containsKey(p)) {
-            return positionTileHashMap.get(p);
+        //Check if tile is in the hashmap positionTileMap
+        //If not, we know it will be a plains since every other tile is plains
+        if(positionTileMap.containsKey(p)) {
+            return positionTileMap.get(p);
         }else {
             return new TileImpl(GameConstants.PLAINS);
         }
     }
 
     public Unit getUnitAt( Position p ) {
-        return null;
+        return positionUnitMap.get(p);
     }
 
     public City getCityAt( Position p ) {
@@ -82,7 +95,7 @@ public class GameImpl implements Game {
     }
 
     public Player getPlayerInTurn() {
-        return currentInTurnPlayer;
+        return currentPlayerInTurn;
     }
 
     public Player getWinner() {
@@ -98,10 +111,10 @@ public class GameImpl implements Game {
     }
 
     public void endOfTurn() {
-        if(currentInTurnPlayer == Player.BLUE){
+        if(currentPlayerInTurn == Player.BLUE){
             configureNewRound();
-            currentInTurnPlayer = Player.RED;
-        }else currentInTurnPlayer = Player.BLUE;
+            currentPlayerInTurn = Player.RED;
+        }else currentPlayerInTurn = Player.BLUE;
     }
 
     public void changeWorkForceFocusInCityAt( Position p, String balance ) {
@@ -119,11 +132,5 @@ public class GameImpl implements Game {
     public void configureNewRound(){
         city1.incrementProductionPoints();
         worldAge += 100;
-    }
-
-    public void initTileMap(){
-        positionTileHashMap.put(new Position(0,1), tile1);
-        positionTileHashMap.put(new Position(1,0), tile2);
-        positionTileHashMap.put(new Position(2,2), tile3);
     }
 }

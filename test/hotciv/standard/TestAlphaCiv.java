@@ -107,7 +107,7 @@ public class TestAlphaCiv {
         int age = game.getAge();
         game.endOfTurn();
         game.endOfTurn();
-        assertThat("World age is 3100", game.getAge(), is(age+100));
+        assertThat("World age is +100 years", game.getAge(), is(age+100));
     }
 
     @Test
@@ -132,5 +132,23 @@ public class TestAlphaCiv {
         assertThat("Should be a city", city, is(notNullValue()));
         Player owner = city.getOwner();
         assertThat("owner should be blue", owner, is(Player.BLUE));
+    }
+
+    @Test
+    public void shouldHaveRedArcherAT2_0ATStart() {
+        Unit unit = game.getUnitAt(new Position(2, 0));
+        assertThat("Should have unit at (2,0)", unit, is(notNullValue()));
+        Player owner = unit.getOwner();
+        assertThat("Owner of unit at (2,0) is red", owner, is(Player.RED));
+        assertThat("Type of unit should be archer", unit.getTypeString(), is(GameConstants.ARCHER));
+    }
+
+    @Test
+    public void shouldHaveBlueLegionAt3_2AtStart() {
+        Unit unit = game.getUnitAt(new Position(3,2));
+        assertThat("Should have unit at (3,2)", unit, is(notNullValue()));
+        Player owner = unit.getOwner();
+        assertThat("Owner of unit at (3,2) is blue", owner, is(Player.BLUE));
+        assertThat("Type of unit should be legion", unit.getTypeString(), is(GameConstants.LEGION));
     }
 }
