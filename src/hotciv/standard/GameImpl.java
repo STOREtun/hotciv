@@ -69,8 +69,6 @@ public class GameImpl implements Game {
     }
 
     public Tile getTileAt( Position p ) {
-        //Check if tile is in the hashmap positionTileMap
-        //If not, we know it will be a plains since every other tile is plains
         if (p.equals(new Position(0, 1))){
             return tile1;
         } else if (p.equals(new Position(1, 0))){
