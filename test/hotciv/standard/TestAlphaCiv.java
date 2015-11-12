@@ -1,5 +1,6 @@
 package hotciv.standard;
 
+import com.sun.xml.internal.ws.policy.PolicySubject;
 import hotciv.framework.*;
 
 import org.junit.*;
@@ -117,7 +118,7 @@ public class TestAlphaCiv {
 
     @Test
     public void shouldHavePlainsEverywhereBut2_2And1_0And0_1() {
-        assertThat("Should have plains at (5,5)", game.getTileAt(new Position(5,5)).getTypeString(), is(GameConstants.PLAINS));
+        assertThat("Should have plains at (5,5)", game.getTileAt(new Position(5, 5)).getTypeString(), is(GameConstants.PLAINS));
         assertThat("Should have plains at (10,3)", game.getTileAt(new Position(10,3)).getTypeString(), is(GameConstants.PLAINS));
     }
 
@@ -140,10 +141,15 @@ public class TestAlphaCiv {
 
     @Test
     public void shouldHaveBlueLegionAt3_2AtStart() {
-        Unit unit = game.getUnitAt(new Position(3,2));
+        Unit unit = game.getUnitAt(new Position(3, 2));
         assertThat("Should have unit at (3,2)", unit, is(notNullValue()));
         Player owner = unit.getOwner();
         assertThat("Owner of unit at (3,2) is blue", owner, is(Player.BLUE));
         assertThat("Type of unit should be legion", unit.getTypeString(), is(GameConstants.LEGION));
+    }
+
+    @Test
+    public void shouldMoveUnit() {
+        assertTrue(game.moveUnit(new Position(3,2), new Position(10, 3)));
     }
 }

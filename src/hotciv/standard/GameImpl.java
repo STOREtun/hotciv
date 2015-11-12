@@ -103,7 +103,12 @@ public class GameImpl implements Game {
     }
 
     public boolean moveUnit( Position from, Position to ) {
-        return false;
+        UnitImpl unit = positionUnitMap.get(from);
+        if(unit != null){
+            positionUnitMap.remove(from);
+            positionUnitMap.put(to, unit);
+            return true;
+        }else return false;
     }
 
     public void endOfTurn() {
