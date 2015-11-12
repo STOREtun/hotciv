@@ -117,13 +117,8 @@ public class TestAlphaCiv {
 
     @Test
     public void shouldHavePlainsEverywhereBut2_2And1_0And0_1() {
-        for (int row = GameConstants.WORLDSIZE-1; row >= 0; row--){
-            for (int column = GameConstants.WORLDSIZE-1; column >= 0; column--) {
-                if (!(row == 1 && column == 0 || row == 2 && column == 2 || row == 0 && column == 1)){
-                    assertThat(" There should be plains at (" + row + "," + column + ")", game.getTileAt(new Position(row, column)).getTypeString(), is(GameConstants.PLAINS));
-                }
-            }
-        }
+        assertThat("Should have plains at (5,5)", game.getTileAt(new Position(5,5)).getTypeString(), is(GameConstants.PLAINS));
+        assertThat("Should have plains at (10,3)", game.getTileAt(new Position(10,3)).getTypeString(), is(GameConstants.PLAINS));
     }
 
     @Test

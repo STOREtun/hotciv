@@ -36,7 +36,6 @@ public class GameImpl implements Game {
     private Player currentPlayerInTurn;
     private int worldAge;
     //Maps
-    private Map<Position, TileImpl> positionTileMap;
     private Map<Position, UnitImpl> positionUnitMap;
     //Create city instance
     private CityImpl city1;
@@ -62,13 +61,8 @@ public class GameImpl implements Game {
         //Create units
         redUnit1 = new UnitImpl(Player.RED, GameConstants.ARCHER);
         blueUnit2 = new UnitImpl(Player.BLUE, GameConstants.LEGION);
-        //Create hash maps of tiles and units
-        positionTileMap = new HashMap<Position, TileImpl>();
+        //Create hash maps of units
         positionUnitMap = new HashMap<Position, UnitImpl>();
-        //Add tile to tile map
-        positionTileMap.put(new Position(0, 1), tile1);
-        positionTileMap.put(new Position(1, 0), tile2);
-        positionTileMap.put(new Position(2, 2), tile3);
         //add units to unit map
         positionUnitMap.put(new Position(2,0), redUnit1);
         positionUnitMap.put(new Position(3,2), blueUnit2);
@@ -77,9 +71,13 @@ public class GameImpl implements Game {
     public Tile getTileAt( Position p ) {
         //Check if tile is in the hashmap positionTileMap
         //If not, we know it will be a plains since every other tile is plains
-        if(positionTileMap.containsKey(p)) {
-            return positionTileMap.get(p);
-        }else {
+        if (p.equals(new Position(0, 1))){
+            return tile1;
+        } else if (p.equals(new Position(1, 0))){
+            return tile2;
+        } else if(p.equals(new Position(2, 2))){
+            return tile3;
+        } else {
             return new TileImpl(GameConstants.PLAINS);
         }
     }
