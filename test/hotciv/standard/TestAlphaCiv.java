@@ -1,6 +1,4 @@
 package hotciv.standard;
-
-import com.sun.xml.internal.ws.policy.PolicySubject;
 import hotciv.framework.*;
 
 import org.junit.*;
