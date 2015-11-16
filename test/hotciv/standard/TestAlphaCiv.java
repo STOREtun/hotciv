@@ -147,7 +147,68 @@ public class TestAlphaCiv {
     }
 
     @Test
+    public void shouldHaveRedSettletAt4_3AtStart() {
+        Unit unit = game.getUnitAt(new Position(4, 3));
+        Player owner = unit.getOwner();
+        assertThat("Owner of unit at (4,3) is blue", owner, is(Player.RED));
+        assertThat("Type of unit should be legion", unit.getTypeString(), is(GameConstants.SETTLER));
+    }
+
+    @Test
     public void shouldMoveUnit() {
-        assertTrue(game.moveUnit(new Position(3,2), new Position(10, 3)));
+        assertTrue(game.moveUnit(new Position(2,0), new Position(2, 1)));
+    }
+
+    @Test
+    public void shouldNotBeAbleToMoveMoreThan1Tile() {
+        assertFalse(game.moveUnit(new Position(2,0), new Position(2,3)));
+        assertFalse(game.moveUnit(new Position(2,0), new Position(0,0)));
+    }
+
+    @Test
+    public void shouldNotLetRedMoveBlueUnit() {
+        assertFalse(game.moveUnit(new Position(3,2), new Position(3,3)));
+    }
+
+    @Test
+    public void shouldNotLetBlueMoveRedUnit() {
+        game.endOfTurn();
+        assertFalse(game.moveUnit(new Position(2,0), new Position(2,1)));
+    }
+
+    @Test
+    public void shouldNotBeAbleToMoveUnitOverMountains() {
+        game.moveUnit(new Position(2,0), new Position(2,1));
+        game.endOfTurn();
+        game.endOfTurn();
+        assertFalse(game.moveUnit(new Position(2,1), new Position(2,2)));
+    }
+
+    @Test
+    public void shouldKillRedPlayerUnitWhenBlueMovesOnTop() {
+        game.moveUnit(new Position(2,0), new Position(2,1));
+        game.endOfTurn();
+        game.moveUnit(new Position(3,2), new Position(2,1));
+        assertThat("Blue should have killed red Unit", game.getUnitAt(new Position(2,1)).getOwner(), is(Player.BLUE));
+    }
+
+    @Test
+    public void shouldKillBluePlayerUnitWhenRedMovesOnTop() {
+        game.moveUnit(new Position(2,0), new Position(2,1));
+        game.endOfTurn();
+        game.endOfTurn();
+        game.moveUnit(new Position(2,1), new Position(3,2));
+        assertThat("Red should have killed blue Unit", game.getUnitAt(new Position(3, 2)).getOwner(), is(Player.RED));
+    }
+
+    @Test
+    public void shouldNotMoveRedUnitsOnTopOfEachOther() {
+        game.moveUnit(new Position(2,0), new Position(2,1));
+        game.endOfTurn();
+        game.endOfTurn();
+        game.moveUnit(new Position(2,1), new Position(3,2));
+        game.endOfTurn();
+        game.endOfTurn();
+        assertFalse(game.moveUnit(new Position(3,2), new Position(4,3)));
     }
 }

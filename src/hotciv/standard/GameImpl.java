@@ -3,6 +3,7 @@ package hotciv.standard;
 import hotciv.framework.*;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Vector;
 
 /** Skeleton implementation of HotCiv.
  
@@ -47,6 +48,7 @@ public class GameImpl implements Game {
     //Create unit instances
     private UnitImpl redUnit1;
     private UnitImpl blueUnit2;
+    private UnitImpl redUnit2;
 
     public GameImpl(){
         currentPlayerInTurn = Player.RED;
@@ -61,11 +63,13 @@ public class GameImpl implements Game {
         //Create units
         redUnit1 = new UnitImpl(Player.RED, GameConstants.ARCHER);
         blueUnit2 = new UnitImpl(Player.BLUE, GameConstants.LEGION);
+        redUnit2 = new UnitImpl(Player.RED, GameConstants.SETTLER);
         //Create hash maps of units
         positionUnitMap = new HashMap<Position, UnitImpl>();
         //add units to unit map
         positionUnitMap.put(new Position(2,0), redUnit1);
         positionUnitMap.put(new Position(3,2), blueUnit2);
+        positionUnitMap.put(new Position(4,3), redUnit2);
     }
 
     public Tile getTileAt( Position p ) {
@@ -104,11 +108,24 @@ public class GameImpl implements Game {
 
     public boolean moveUnit( Position from, Position to ) {
         UnitImpl unit = positionUnitMap.get(from);
-        if(!positionUnitMap.containsKey(to)){
+        int vectorX = Math.abs(to.getRow() - from.getRow());
+        int vectorY = Math.abs(to.getColumn() - from.getColumn());
+        Player unitOwner = unit.getOwner();
+
+        if (!unitOwner.equals(currentPlayerInTurn)){
+            return false;
+        } else if (!(vectorX < 2) || !(vectorY < 2)){
+            return false;
+        } else if (getTileAt(to).getTypeString().equals(GameConstants.MOUNTAINS)) {
+            return false;
+        } else if(!positionUnitMap.containsKey(to)){
             positionUnitMap.remove(from);
             positionUnitMap.put(to, unit);
             return true;
-        }else return false;
+        } else if (!positionUnitMap.get(to).getOwner().equals(currentPlayerInTurn)){
+            positionUnitMap.replace(to, unit);
+        }
+        return false;
     }
 
     public void endOfTurn() {
