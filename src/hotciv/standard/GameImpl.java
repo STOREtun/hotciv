@@ -104,7 +104,7 @@ public class GameImpl implements Game {
 
     public boolean moveUnit( Position from, Position to ) {
         UnitImpl unit = positionUnitMap.get(from);
-        if(unit != null){
+        if(!positionUnitMap.containsKey(to)){
             positionUnitMap.remove(from);
             positionUnitMap.put(to, unit);
             return true;
