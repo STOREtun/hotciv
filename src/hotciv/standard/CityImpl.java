@@ -45,4 +45,8 @@ public class CityImpl implements City{
     public void incrementProductionPoints(){
         productionPoints += 6;
      }
+
+    public void changeOwner(Player player){
+        owner = player;
+    }
 }
