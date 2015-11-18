@@ -2,6 +2,7 @@ package hotciv.standard;
 
 import hotciv.framework.*;
 import hotciv.variance.WorldAgingLinearStrategy;
+import javafx.geometry.Pos;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -103,7 +104,11 @@ public class GameImpl implements Game {
     public CityImpl getCityAt( Position p ) {
         if (p.equals(new Position(4,1))){
             return city2;
-        } else return city1;
+        } else if(p.equals(new Position(1,1))) {
+            return city1;
+        }
+
+        return null;
     }
 
     public Player getPlayerInTurn() {
@@ -118,31 +123,47 @@ public class GameImpl implements Game {
         return worldAge;
     }
 
-    /* Can be rewritten to be more readable */
     public boolean moveUnit( Position from, Position to ) {
-        UnitImpl unit = positionUnitMap.get(from);
-        int vectorX = Math.abs(to.getRow() - from.getRow());
-        int vectorY = Math.abs(to.getColumn() - from.getColumn());
-        Player unitOwner = unit.getOwner();
+        UnitImpl movingUnit = positionUnitMap.get(from);
+        int x = Math.abs(to.getRow() - from.getRow());
+        int y = Math.abs(to.getColumn() - from.getColumn());
+        Player unitOwner = movingUnit.getOwner();
 
-        if (!unitOwner.equals(currentPlayerInTurn)) return false;
-        if (!(vectorX < 2) || !(vectorY < 2)) return false;
-        if (getTileAt(to).getTypeString().equals(GameConstants.MOUNTAINS)) return false;
-        if(getCityAt(to) != null) {
-            if (!getCityAt(to).getOwner().equals(currentPlayerInTurn)) {
-                getCityAt(to).changeOwner(currentPlayerInTurn);
+        boolean playerInTurnMovingUnit = unitOwner.equals(currentPlayerInTurn);
+        if(playerInTurnMovingUnit && isValidMove(x, y, to)){
+            if(getCityAt(to) != null) {           // there is a city at the to tile
+                if (!getCityAt(to).getOwner().equals(currentPlayerInTurn)) {
+                    getCityAt(to).changeOwner(currentPlayerInTurn);
+                    return true;
+                }
+            }
+
+            boolean noFriendlyUnitOnDestinationTile = !positionUnitMap.containsKey(to);
+            if(noFriendlyUnitOnDestinationTile) {
+                positionUnitMap.remove(from);           // update the units position in the positionMap
+                positionUnitMap.put(to, movingUnit);
+                return true;
+            }
+
+            boolean enemyUnitPresentOnDestinationTile = !positionUnitMap.get(to).getOwner().equals(currentPlayerInTurn);
+            if (enemyUnitPresentOnDestinationTile){
+                positionUnitMap.replace(to, movingUnit); // kill and replace the unit
+                positionUnitMap.remove(from);
+                return true;
             }
         }
-        if(!positionUnitMap.containsKey(to)){
-            positionUnitMap.remove(from);
-            positionUnitMap.put(to, unit);
-            return true;
-        }
-        if (!positionUnitMap.get(to).getOwner().equals(currentPlayerInTurn)){
-            positionUnitMap.replace(to, unit);
-            return true;
-        }
+//        System.err.println("Move made by: " + currentPlayerInTurn + " is not valid");
         return false;
+    }
+
+    public boolean isValidMove(int x, int y, Position endPostion){
+        Tile destinationTile = getTileAt(endPostion);
+        if( (x < 2) && (y < 2) ){
+            boolean tileIsMountain = destinationTile.getTypeString().equals(GameConstants.MOUNTAINS);
+            boolean tileIsOcean = destinationTile.getTypeString().equals(GameConstants.OCEANS);
+
+            return (!tileIsMountain && !tileIsOcean);
+        }else return false;
     }
 
     public void endOfTurn() {
@@ -166,6 +187,11 @@ public class GameImpl implements Game {
 
     public void configureNewRound(){
         city1.incrementProductionPoints();
+        city2.incrementProductionPoints();
         worldAge = worldAgingStrategy.calcWorldAge(worldAge);
+    }
+
+    public Map<Position, UnitImpl> getMap(){
+        return positionUnitMap;
     }
 }

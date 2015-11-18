@@ -37,8 +37,8 @@ import static org.hamcrest.CoreMatchers.*;
 
 */
 public class TestAlphaCiv {
-    private Game game;
-    /** Fixture for alphaciv testing. */
+    private GameImpl game;
+    /** Fixture for alphaCiv testing. */
     @Before
     public void setUp() {
         game = new GameImpl(new WorldAgingLinearStrategy());
@@ -150,7 +150,7 @@ public class TestAlphaCiv {
     }
 
     @Test
-    public void shouldHaveRedSettletAt4_3AtStart() {
+    public void shouldHaveRedSettlerAt4_3AtStart() {
         Unit unit = game.getUnitAt(new Position(4, 3));
         Player owner = unit.getOwner();
         assertThat("Owner of unit at (4,3) is blue", owner, is(Player.RED));
@@ -159,12 +159,12 @@ public class TestAlphaCiv {
 
     @Test
     public void shouldMoveUnit() {
-        assertTrue(game.moveUnit(new Position(2,0), new Position(2, 1)));
+        assertTrue(game.moveUnit(new Position(2, 0), new Position(2, 1)));
     }
 
     @Test
     public void shouldNotBeAbleToMoveMoreThan1Tile() {
-        assertFalse(game.moveUnit(new Position(2,0), new Position(2,3)));
+        assertFalse(game.moveUnit(new Position(2, 0), new Position(2, 3)));
         assertFalse(game.moveUnit(new Position(2,0), new Position(0,0)));
     }
 
@@ -200,18 +200,20 @@ public class TestAlphaCiv {
 
     @Test
     public void shouldLetRedDestroyBlueUnit() {
-        game.moveUnit(new Position(2,0), new Position(2,1));
+        assertTrue(game.moveUnit(new Position(2,0), new Position(2,1)));
         game.endOfTurn();
         game.endOfTurn();
-        game.moveUnit(new Position(2,1), new Position(3,2));
+        assertTrue(game.moveUnit(new Position(2,1), new Position(3,2)));
         assertThat("Red should own tile", game.getUnitAt(new Position(3,2)).getOwner(), is(Player.RED));
     }
 
     @Test
     public void shouldLetBlueDestroyRedUnit() {
-        game.moveUnit(new Position(2,0), new Position(2,1));
+        game.endOfTurn(); // blue turn
+        assertTrue(game.moveUnit(new Position(3, 2), new Position(2, 1)));
         game.endOfTurn();
-        game.moveUnit(new Position(3, 2), new Position(2, 1));
-        assertThat("Blue should have killed red Unit", game.getUnitAt(new Position(2, 1)).getOwner(), is(Player.BLUE));
+        game.endOfTurn(); // blue turn again
+        assertTrue(game.moveUnit(new Position(2, 1), new Position(2, 0)));
+        assertThat("Blue should own the tile", game.getUnitAt(new Position(2,0)).getOwner(), is(Player.BLUE));
     }
 }
