@@ -1,8 +1,6 @@
 package hotciv.betaCiv;
 
 import hotciv.framework.Game;
-import hotciv.framework.WorldAgingStrategy;
-import hotciv.standard.CityImpl;
 import hotciv.standard.GameImpl;
 import hotciv.variance.WorldAgingBetaCivStrategy;
 import org.junit.Before;

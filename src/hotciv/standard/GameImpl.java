@@ -100,7 +100,7 @@ public class GameImpl implements Game {
         return positionUnitMap.get(p);
     }
 
-    public City getCityAt( Position p ) {
+    public CityImpl getCityAt( Position p ) {
         if (p.equals(new Position(4,1))){
             return city2;
         } else return city1;
@@ -125,18 +125,22 @@ public class GameImpl implements Game {
         int vectorY = Math.abs(to.getColumn() - from.getColumn());
         Player unitOwner = unit.getOwner();
 
-        if (!unitOwner.equals(currentPlayerInTurn)){
-            return false;
-        } else if (!(vectorX < 2) || !(vectorY < 2)){
-            return false;
-        } else if (getTileAt(to).getTypeString().equals(GameConstants.MOUNTAINS)) {
-            return false;
-        } else if(!positionUnitMap.containsKey(to)){
+        if (!unitOwner.equals(currentPlayerInTurn)) return false;
+        if (!(vectorX < 2) || !(vectorY < 2)) return false;
+        if (getTileAt(to).getTypeString().equals(GameConstants.MOUNTAINS)) return false;
+        if(getCityAt(to) != null) {
+            if (!getCityAt(to).getOwner().equals(currentPlayerInTurn)) {
+                getCityAt(to).changeOwner(currentPlayerInTurn);
+            }
+        }
+        if(!positionUnitMap.containsKey(to)){
             positionUnitMap.remove(from);
             positionUnitMap.put(to, unit);
             return true;
-        } else if (!positionUnitMap.get(to).getOwner().equals(currentPlayerInTurn)){
+        }
+        if (!positionUnitMap.get(to).getOwner().equals(currentPlayerInTurn)){
             positionUnitMap.replace(to, unit);
+            return true;
         }
         return false;
     }
