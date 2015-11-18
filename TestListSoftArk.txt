@@ -26,6 +26,18 @@ Søren Ditlev, Asger Rasmussen, Thomas Fly
 [x] Red’s unit attack and destroy Blue’s unit
 [x] Blue’s unit attack and destroy Red’s unit
 
-----
 
+BetaCiv
+[x] Refactor aging to use stategy pattern
+[x] Between 4000BC and 100BC 100 years is incremented per round
+[x] Around birth of Christ sequence is -100, -1, +1, +50
+[x] Between 50AD and 1750 50 years pass per round
+[x] Between 1750 and 1900 25 years pass per round
+[x] Between 1900 and 1970 5 years per round
+[x] After 1970 1 year per round 
+
+Notes:
+Remove unit fields
+
+----
 Instruktor mail: johanbay@gmail.com
