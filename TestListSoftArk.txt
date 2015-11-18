@@ -11,9 +11,10 @@ Søren Ditlev, Asger Rasmussen, Thomas Fly
 [x] after Red it is Blue that is in turn
 [x] Red wins in year 3000 BC
 [x] cities' production should be 0 at game start
+[x] cities produce 6 ‘production’ after a round has ended
 [x] plains everywhere but (2,2), (1,0), (0,1)
 [x] Red initially has unit type archer at (2,0)
-[] Red should have settker at (4,3)
+[x] Red should have settker at (4,3)
 [x] blue initially has unit type legion at (3,2) 
 [x] Blue should have city at 4,1
 [x] Should not be able to move unit more than 1 tile
@@ -21,10 +22,9 @@ Søren Ditlev, Asger Rasmussen, Thomas Fly
 [x] Blue cannot move red's unit
 [x] units cannot move over mountain
 [x] new round starts after blue end of turn
-[x] should kill red player unit when blue moves on top
-[x] should kill blue player unit when red moves on top
-[] cities produce 6 ‘production’ after a round has ended
-[] Red’s unit attack and destroy Blue’s unit
+[x] red cannot move units on top of each other
+[x] Red’s unit attack and destroy Blue’s unit
+[x] Blue’s unit attack and destroy Red’s unit
 
 ----
 
