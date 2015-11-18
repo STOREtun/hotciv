@@ -1,6 +1,9 @@
-package hotciv.standard;
+package hotciv.alphaCiv;
 import hotciv.framework.*;
 
+import hotciv.standard.CityImpl;
+import hotciv.standard.GameImpl;
+import hotciv.variance.WorldAgingLinearStrategy;
 import org.junit.*;
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
@@ -38,7 +41,7 @@ public class TestAlphaCiv {
     /** Fixture for alphaciv testing. */
     @Before
     public void setUp() {
-        game = new GameImpl();
+        game = new GameImpl(new WorldAgingLinearStrategy());
     }
 
     @Test
@@ -192,7 +195,7 @@ public class TestAlphaCiv {
         game.moveUnit(new Position(2,1), new Position(3,2));
         game.endOfTurn();
         game.endOfTurn();
-        assertFalse(game.moveUnit(new Position(3,2), new Position(4,3)));
+        assertFalse(game.moveUnit(new Position(3, 2), new Position(4, 3)));
     }
 
     @Test
@@ -208,7 +211,7 @@ public class TestAlphaCiv {
     public void shouldLetBlueDestroyRedUnit() {
         game.moveUnit(new Position(2,0), new Position(2,1));
         game.endOfTurn();
-        game.moveUnit(new Position(3,2), new Position(2,1));
-        assertThat("Blue should have killed red Unit", game.getUnitAt(new Position(2,1)).getOwner(), is(Player.BLUE));
+        game.moveUnit(new Position(3, 2), new Position(2, 1));
+        assertThat("Blue should have killed red Unit", game.getUnitAt(new Position(2, 1)).getOwner(), is(Player.BLUE));
     }
 }

@@ -1,6 +1,8 @@
 package hotciv.standard;
 
 import hotciv.framework.*;
+import hotciv.variance.WorldAgingLinearStrategy;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Vector;
@@ -36,40 +38,50 @@ public class GameImpl implements Game {
     //game variables
     private Player currentPlayerInTurn;
     private int worldAge;
+
     //Maps
     private Map<Position, UnitImpl> positionUnitMap;
+
     //Create city instance
     private CityImpl city1;
     private CityImpl city2;
+
     //Create tile instances
     private TileImpl tile1;
     private TileImpl tile2;
     private TileImpl tile3;
-    //Create unit instances
-    private UnitImpl redUnit1;
-    private UnitImpl blueUnit2;
-    private UnitImpl redUnit2;
 
-    public GameImpl(){
+    //World age strategy
+    private WorldAgingStrategy worldAgingStrategy;
+
+    public GameImpl(WorldAgingStrategy worldAgingStrategy){
         currentPlayerInTurn = Player.RED;
         worldAge = -4000;
+
         //Create cities
         city1 = new CityImpl(Player.RED);
         city2 = new CityImpl(Player.BLUE);
+
         //Create tiles
         tile1 = new TileImpl(GameConstants.OCEANS);
         tile2 = new TileImpl(GameConstants.HILLS);
         tile3 = new TileImpl(GameConstants.MOUNTAINS);
-        //Create units
-        redUnit1 = new UnitImpl(Player.RED, GameConstants.ARCHER);
-        blueUnit2 = new UnitImpl(Player.BLUE, GameConstants.LEGION);
-        redUnit2 = new UnitImpl(Player.RED, GameConstants.SETTLER);
+
         //Create hash maps of units
         positionUnitMap = new HashMap<Position, UnitImpl>();
+
+        //Create units
+        UnitImpl redUnit1 = new UnitImpl(Player.RED, GameConstants.ARCHER);
+        UnitImpl blueUnit2 = new UnitImpl(Player.BLUE, GameConstants.LEGION);
+        UnitImpl redUnit2 = new UnitImpl(Player.RED, GameConstants.SETTLER);
+
         //add units to unit map
         positionUnitMap.put(new Position(2,0), redUnit1);
         positionUnitMap.put(new Position(3,2), blueUnit2);
         positionUnitMap.put(new Position(4,3), redUnit2);
+
+        //World aging strategy
+        this.worldAgingStrategy = worldAgingStrategy;
     }
 
     public Tile getTileAt( Position p ) {
@@ -106,6 +118,7 @@ public class GameImpl implements Game {
         return worldAge;
     }
 
+    /* Can be rewritten to be more readable */
     public boolean moveUnit( Position from, Position to ) {
         UnitImpl unit = positionUnitMap.get(from);
         int vectorX = Math.abs(to.getRow() - from.getRow());
@@ -149,6 +162,6 @@ public class GameImpl implements Game {
 
     public void configureNewRound(){
         city1.incrementProductionPoints();
-        worldAge += 100;
+        worldAge = worldAgingStrategy.calcWorldAge(worldAge);
     }
 }

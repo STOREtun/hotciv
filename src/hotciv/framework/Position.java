@@ -45,12 +45,16 @@ public class Position {
   /** get the row represented by this position.
    * @return the row.
    */
-  public int getRow() { return r; }
+  public int getRow(){
+      return r;
+  }
 
   /** get the column represented by this position.
    * @return the column.
    */
-  public int getColumn() { return c; }
+  public int getColumn() {
+      return c;
+  }
 
   public boolean equals(Object o) {
     if (o == null) { return false; }
