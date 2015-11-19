@@ -4,9 +4,7 @@ import hotciv.framework.*;
 import hotciv.variance.WorldAgingLinearStrategy;
 import javafx.geometry.Pos;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Vector;
+import java.util.*;
 
 /** Skeleton implementation of HotCiv.
  
@@ -178,7 +176,7 @@ public class GameImpl implements Game {
     }
 
     public void changeProductionInCityAt( Position p, String unitType ) {
-
+        getCityAt(p).changeProduction(unitType);
     }
 
     public void performUnitActionAt( Position p ) {
@@ -187,11 +185,43 @@ public class GameImpl implements Game {
 
     public void configureNewRound(){
         city1.incrementProductionPoints();
+        if (city1.getProduction() != null && city1.getProductionPoints() >= 12){
+            Position firstEmptyTile = checkAdjacentTilesForUnit(new Position(1,1));
+            if (firstEmptyTile != null) {
+                UnitImpl unitProduced = new UnitImpl(city1.getOwner(), city1.getProduction());
+                positionUnitMap.put(firstEmptyTile, unitProduced);
+            }
+        }
+
         city2.incrementProductionPoints();
+        if (city2.getProduction() != null && city2.getProductionPoints() >= 12){
+            Position firstEmptyTile = checkAdjacentTilesForUnit(new Position(4,1));
+            if (firstEmptyTile != null) {
+                UnitImpl unitProduced = new UnitImpl(city2.getOwner(), city2.getProduction());
+                positionUnitMap.put(firstEmptyTile, unitProduced);
+            }
+        }
         worldAge = worldAgingStrategy.calcWorldAge(worldAge);
     }
 
-    public Map<Position, UnitImpl> getMap(){
-        return positionUnitMap;
+    public Position checkAdjacentTilesForUnit(Position p){
+        int x = p.getRow();
+        int y = p.getColumn();
+
+        List<Position> positions = new ArrayList<>();
+        positions.add(new Position(x, y));
+        positions.add(new Position(x, y+1));
+        positions.add(new Position(x+1, y+1));
+        positions.add(new Position(x+1, y));
+        positions.add(new Position(x+1, y-1));
+        positions.add(new Position(x, y-1));
+        positions.add(new Position(x-1, y-1));
+        positions.add(new Position(x-1, y));
+        positions.add(new Position(x-1, y+1));
+
+        for (Position pos: positions){
+            if (getUnitAt(pos) == null) return pos;
+        }
+        return null;
     }
 }

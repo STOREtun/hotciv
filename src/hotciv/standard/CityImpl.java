@@ -1,6 +1,7 @@
 package hotciv.standard;
 
 import hotciv.framework.City;
+import hotciv.framework.GameConstants;
 import hotciv.framework.Player;
 
 /**
@@ -44,9 +45,19 @@ public class CityImpl implements City{
 
     public void incrementProductionPoints(){
         productionPoints += 6;
-     }
+    }
+
+    public void endProduction(){
+        productionPoints -= 12;
+        production = null;
+    }
+
+    public void changeProduction(String unitType){
+        production = unitType;
+    }
 
     public void changeOwner(Player player){
         owner = player;
     }
+
 }

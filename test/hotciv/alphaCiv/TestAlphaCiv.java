@@ -216,4 +216,23 @@ public class TestAlphaCiv {
         assertTrue(game.moveUnit(new Position(2, 1), new Position(2, 0)));
         assertThat("Blue should own the tile", game.getUnitAt(new Position(2,0)).getOwner(), is(Player.BLUE));
     }
+
+    @Test
+    public void shouldSetAndGetProductionFromCity() {
+        CityImpl city = game.getCityAt(new Position(4,1));
+        game.changeProductionInCityAt(new Position(4,1), GameConstants.ARCHER);
+        assertThat("Should be producing archer", city.getProduction(), is(GameConstants.ARCHER));
+    }
+
+    @Test
+    public void shouldSpawnUnitsWhenAccumulatedEnoughProductionPoints() {
+        assertNull(game.getUnitAt(new Position(4, 1)));
+        game.changeProductionInCityAt(new Position(4,1), GameConstants.ARCHER);
+        game.endOfTurn();
+        game.endOfTurn();
+        assertNull(game.getUnitAt(new Position(4,1)));
+        game.endOfTurn();
+        game.endOfTurn();
+        assertNotNull(game.getUnitAt(new Position(4,1)));
+    }
 }
