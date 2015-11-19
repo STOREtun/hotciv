@@ -190,7 +190,8 @@ public class GameImpl implements Game {
             if (firstEmptyTile != null) {
                 UnitImpl unitProduced = new UnitImpl(city1.getOwner(), city1.getProduction());
                 positionUnitMap.put(firstEmptyTile, unitProduced);
-            }
+                city1.endProduction();
+            } /* else alert player that there is no room for new units */
         }
 
         city2.incrementProductionPoints();
@@ -199,7 +200,8 @@ public class GameImpl implements Game {
             if (firstEmptyTile != null) {
                 UnitImpl unitProduced = new UnitImpl(city2.getOwner(), city2.getProduction());
                 positionUnitMap.put(firstEmptyTile, unitProduced);
-            }
+                city2.endProduction();
+            } /* else alert player that there is no room for new units */
         }
         worldAge = worldAgingStrategy.calcWorldAge(worldAge);
     }
@@ -220,7 +222,7 @@ public class GameImpl implements Game {
         positions.add(new Position(x-1, y+1));
 
         for (Position pos: positions){
-            if (getUnitAt(pos) == null) return pos;
+            if (!positionUnitMap.containsKey(pos)) return pos;
         }
         return null;
     }
