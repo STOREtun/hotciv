@@ -2,6 +2,7 @@ package hotciv.betaCiv;
 
 import hotciv.framework.Game;
 import hotciv.framework.Player;
+import hotciv.framework.Position;
 import hotciv.framework.WinnerStrategy;
 import hotciv.standard.CityImpl;
 import hotciv.standard.GameImpl;
@@ -49,5 +50,16 @@ public class TestBetaCivWinnerCalculation {
         testCities.add(new CityImpl(Player.BLUE));
         testCities.add(new CityImpl(Player.RED));
         assertNull(betaWinner.calcWinner(testCities));
+    }
+
+    @Test
+    public void shouldLetRedWinAfterBlueCityTakeOver() {
+        assertThat("Owner is initial blue", game.getCityAt(new Position(4,1)).getOwner(), is(Player.BLUE));
+        assertTrue(game.moveUnit(new Position(2, 0), new Position(3, 1)));
+        game.endOfTurn();
+        game.endOfTurn();
+        assertTrue(game.moveUnit(new Position(3, 1), new Position(4, 1)));
+        assertThat("Owner should be Red", game.getCityAt(new Position(4,1)).getOwner(), is(Player.RED));
+        assertThat("Winner is Red", game.getWinner(), is(Player.RED));
     }
 }
