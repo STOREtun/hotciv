@@ -3,6 +3,7 @@ import hotciv.framework.*;
 
 import hotciv.standard.CityImpl;
 import hotciv.standard.GameImpl;
+import hotciv.variance.WinnerAlphaCivStrategy;
 import hotciv.variance.WorldAgingLinearStrategy;
 import org.junit.*;
 
@@ -42,7 +43,7 @@ public class TestAlphaCiv {
     /** Fixture for alphaCiv testing. */
     @Before
     public void setUp() {
-        game = new GameImpl(new WorldAgingLinearStrategy());
+        game = new GameImpl(new WorldAgingLinearStrategy(),new WinnerAlphaCivStrategy());
     }
 
     @Test

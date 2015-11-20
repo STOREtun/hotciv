@@ -52,8 +52,9 @@ public class GameImpl implements Game {
 
     //World age strategy
     private WorldAgingStrategy worldAgingStrategy;
+    private WinnerStrategy winnerStrategy;
 
-    public GameImpl(WorldAgingStrategy worldAgingStrategy){
+    public GameImpl(WorldAgingStrategy worldAgingStrategy, WinnerStrategy winnerStrategy){
         currentPlayerInTurn = Player.RED;
         worldAge = -4000;
 
@@ -81,6 +82,7 @@ public class GameImpl implements Game {
 
         //World aging strategy
         this.worldAgingStrategy = worldAgingStrategy;
+        this.winnerStrategy = winnerStrategy;
     }
 
     public Tile getTileAt( Position p ) {
@@ -114,7 +116,10 @@ public class GameImpl implements Game {
     }
 
     public Player getWinner() {
-        return Player.RED;
+        ArrayList<CityImpl> cities = new ArrayList<>();
+        cities.add(city1);
+        cities.add(city2);
+        return winnerStrategy.calcWinner(cities);
     }
 
     public int getAge() {
