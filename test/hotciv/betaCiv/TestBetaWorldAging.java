@@ -2,6 +2,7 @@ package hotciv.betaCiv;
 
 import hotciv.framework.Game;
 import hotciv.standard.GameImpl;
+import hotciv.variance.SimpleWorldWorldStrategy;
 import hotciv.variance.WinnerBetaCivStrategy;
 import hotciv.variance.WorldAgingBetaCivStrategy;
 import org.junit.Before;
@@ -20,7 +21,7 @@ public class TestBetaWorldAging {
 
     @Before
     public void setupGame(){
-        game = new GameImpl(new WorldAgingBetaCivStrategy(), new WinnerBetaCivStrategy());
+        game = new GameImpl(new WorldAgingBetaCivStrategy(), new WinnerBetaCivStrategy(), new SimpleWorldWorldStrategy());
         agingBetaCivStrategy = new WorldAgingBetaCivStrategy();
     }
 

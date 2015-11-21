@@ -6,6 +6,7 @@ import hotciv.framework.Position;
 import hotciv.framework.WinnerStrategy;
 import hotciv.standard.CityImpl;
 import hotciv.standard.GameImpl;
+import hotciv.variance.SimpleWorldWorldStrategy;
 import hotciv.variance.WinnerBetaCivStrategy;
 import hotciv.variance.WorldAgingBetaCivStrategy;
 import org.junit.Before;
@@ -25,7 +26,7 @@ public class TestBetaCivWinnerCalculation {
 
     @Before
     public void setupGame() {
-        game = new GameImpl(new WorldAgingBetaCivStrategy(), new WinnerBetaCivStrategy());
+        game = new GameImpl(new WorldAgingBetaCivStrategy(), new WinnerBetaCivStrategy(), new SimpleWorldWorldStrategy());
     }
 
     @Test

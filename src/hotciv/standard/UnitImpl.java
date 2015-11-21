@@ -1,5 +1,6 @@
 package hotciv.standard;
 
+import hotciv.framework.GameConstants;
 import hotciv.framework.Player;
 import hotciv.framework.Unit;
 
@@ -9,10 +10,13 @@ import hotciv.framework.Unit;
 public class UnitImpl implements Unit {
     private Player owner;
     private String unitType;
+    private int defensiveStrength;
+    private boolean fortified;
 
     public UnitImpl(Player _owner, String _unitType) {
         this.owner = _owner;
         this.unitType = _unitType;
+        defensiveStrength = 3;
     }
 
     @Override
@@ -32,11 +36,21 @@ public class UnitImpl implements Unit {
 
     @Override
     public int getDefensiveStrength() {
-        return 0;
+        return defensiveStrength;
     }
 
     @Override
     public int getAttackingStrength() {
         return 0;
+    }
+
+    public void archerFortifyAction(){
+        if (fortified) {
+            defensiveStrength = defensiveStrength / 2;
+        } else {
+            defensiveStrength = defensiveStrength * 2;
+        }
+        fortified = !fortified;
+
     }
 }

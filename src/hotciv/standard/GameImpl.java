@@ -40,6 +40,8 @@ public class GameImpl implements Game {
 
     //Maps
     private Map<Position, UnitImpl> positionUnitMap;
+    private Map<Position, CityImpl> positionCityMap;
+    private Map<Position, TileImpl> positionSpecialTileMap;
 
     //Create city instance
     private CityImpl city1;
@@ -54,7 +56,7 @@ public class GameImpl implements Game {
     private WorldAgingStrategy worldAgingStrategy;
     private WinnerStrategy winnerStrategy;
 
-    public GameImpl(WorldAgingStrategy worldAgingStrategy, WinnerStrategy winnerStrategy){
+    public GameImpl(WorldAgingStrategy worldAgingStrategy, WinnerStrategy winnerStrategy, WorldMapStrategy worldMapStrategy){
         currentPlayerInTurn = Player.RED;
         worldAge = -4000;
 
@@ -62,13 +64,10 @@ public class GameImpl implements Game {
         city1 = new CityImpl(Player.RED);
         city2 = new CityImpl(Player.BLUE);
 
-        //Create tiles
-        tile1 = new TileImpl(GameConstants.OCEANS);
-        tile2 = new TileImpl(GameConstants.HILLS);
-        tile3 = new TileImpl(GameConstants.MOUNTAINS);
-
         //Create hash maps of units
         positionUnitMap = new HashMap<Position, UnitImpl>();
+        positionCityMap = new HashMap<Position, CityImpl>();
+        positionSpecialTileMap = worldMapStrategy.getWorldLayout();
 
         //Create units
         UnitImpl redUnit1 = new UnitImpl(Player.RED, GameConstants.ARCHER);
@@ -80,21 +79,19 @@ public class GameImpl implements Game {
         positionUnitMap.put(new Position(3,2), blueUnit2);
         positionUnitMap.put(new Position(4,3), redUnit2);
 
+        //Add cities to city map
+        positionCityMap.put(new Position(1,1), city1);
+        positionCityMap.put(new Position(4,1), city2);
+
         //World aging strategy
         this.worldAgingStrategy = worldAgingStrategy;
         this.winnerStrategy = winnerStrategy;
     }
 
-    public Tile getTileAt( Position p ) {
-        if (p.equals(new Position(0, 1))){
-            return tile1;
-        } else if (p.equals(new Position(1, 0))){
-            return tile2;
-        } else if(p.equals(new Position(2, 2))){
-            return tile3;
-        } else {
-            return new TileImpl(GameConstants.PLAINS);
-        }
+    public TileImpl getTileAt( Position p ) {
+        if (positionSpecialTileMap.containsKey(p)){
+            return positionSpecialTileMap.get(p);
+        } else return new TileImpl(GameConstants.PLAINS);
     }
 
     public Unit getUnitAt( Position p ) {
@@ -102,13 +99,8 @@ public class GameImpl implements Game {
     }
 
     public CityImpl getCityAt( Position p ) {
-        if (p.equals(new Position(4,1))){
-            return city2;
-        } else if(p.equals(new Position(1,1))) {
-            return city1;
-        }
 
-        return null;
+        return positionCityMap.get(p);
     }
 
     public Player getPlayerInTurn() {
@@ -186,7 +178,15 @@ public class GameImpl implements Game {
     }
 
     public void performUnitActionAt( Position p ) {
-
+        UnitImpl unitActor = (UnitImpl) getUnitAt(p);
+        if (unitActor.getTypeString().equals(GameConstants.ARCHER)){
+            unitActor.archerFortifyAction();
+        }
+        if (unitActor.getTypeString().equals(GameConstants.SETTLER)){
+            CityImpl city = new CityImpl(unitActor.getOwner());
+            positionUnitMap.remove(p);
+            positionCityMap.put(p, city);
+        }
     }
 
     public void configureNewRound(){

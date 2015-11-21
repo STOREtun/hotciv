@@ -3,6 +3,7 @@ import hotciv.framework.*;
 
 import hotciv.standard.CityImpl;
 import hotciv.standard.GameImpl;
+import hotciv.variance.SimpleWorldWorldStrategy;
 import hotciv.variance.WinnerAlphaCivStrategy;
 import hotciv.variance.WorldAgingLinearStrategy;
 import org.junit.*;
@@ -43,7 +44,7 @@ public class TestAlphaCiv {
     /** Fixture for alphaCiv testing. */
     @Before
     public void setUp() {
-        game = new GameImpl(new WorldAgingLinearStrategy(),new WinnerAlphaCivStrategy());
+        game = new GameImpl(new WorldAgingLinearStrategy(),new WinnerAlphaCivStrategy(), new SimpleWorldWorldStrategy());
     }
 
     @Test
@@ -58,14 +59,14 @@ public class TestAlphaCiv {
     }
 
     @Test
-    public void shouldHaveOceanAt0_1() {
-        Tile tile = game.getTileAt(new Position(0,1));
+    public void shouldHaveOceanAt1_0() {
+        Tile tile = game.getTileAt(new Position(1,0));
         assertThat("There should be ocean at (0,1)", tile.getTypeString(), is(GameConstants.OCEANS));
     }
 
     @Test
-    public void shouldHaveHillsAt1_0() {
-        Tile tile = game.getTileAt(new Position(1,0));
+    public void shouldHaveHillsAt0_1() {
+        Tile tile = game.getTileAt(new Position(0,1));
         assertThat("There should be hills at (1,0)", tile.getTypeString(), is(GameConstants.HILLS));
     }
 
