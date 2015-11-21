@@ -115,6 +115,7 @@ public class GameImpl implements Game {
         return currentPlayerInTurn;
     }
 
+    /* Could be called after city takeover */
     public Player getWinner() {
         ArrayList<CityImpl> cities = new ArrayList<>();
         cities.add(city1);

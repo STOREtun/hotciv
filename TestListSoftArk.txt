@@ -37,7 +37,7 @@ BetaCiv
 [x] After 1970 1 year per round
 
 [x] Units can attack and take over cities
-[] The game ends when a player lose his last city
+[x] The game ends when a player lose his last city
 
 Notes:
 Remove unit fields
