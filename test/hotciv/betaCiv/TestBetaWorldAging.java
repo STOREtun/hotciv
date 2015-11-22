@@ -1,10 +1,11 @@
 package hotciv.betaCiv;
 
+import hotciv.framework.CivType;
 import hotciv.framework.Game;
 import hotciv.standard.GameImpl;
+import hotciv.variance.AlphaCiv;
+import hotciv.variance.BetaCiv;
 import hotciv.variance.SimpleWorldWorldStrategy;
-import hotciv.variance.WinnerBetaCivStrategy;
-import hotciv.variance.WorldAgingBetaCivStrategy;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -17,12 +18,12 @@ import static org.junit.Assert.assertThat;
 public class TestBetaWorldAging {
 
     private Game game;
-    private WorldAgingBetaCivStrategy agingBetaCivStrategy;
+    private CivType agingBetaCivStrategy;
 
     @Before
     public void setupGame(){
-        game = new GameImpl(new WorldAgingBetaCivStrategy(), new WinnerBetaCivStrategy(), new SimpleWorldWorldStrategy());
-        agingBetaCivStrategy = new WorldAgingBetaCivStrategy();
+        game = new GameImpl(new BetaCiv(), new SimpleWorldWorldStrategy());
+        agingBetaCivStrategy = new BetaCiv();
     }
 
     @Test

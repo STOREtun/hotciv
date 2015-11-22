@@ -3,9 +3,8 @@ import hotciv.framework.*;
 
 import hotciv.standard.CityImpl;
 import hotciv.standard.GameImpl;
+import hotciv.variance.AlphaCiv;
 import hotciv.variance.SimpleWorldWorldStrategy;
-import hotciv.variance.WinnerAlphaCivStrategy;
-import hotciv.variance.WorldAgingLinearStrategy;
 import org.junit.*;
 
 import static org.junit.Assert.*;
@@ -44,7 +43,7 @@ public class TestAlphaCiv {
     /** Fixture for alphaCiv testing. */
     @Before
     public void setUp() {
-        game = new GameImpl(new WorldAgingLinearStrategy(),new WinnerAlphaCivStrategy(), new SimpleWorldWorldStrategy());
+        game = new GameImpl(new AlphaCiv(), new SimpleWorldWorldStrategy());
     }
 
     @Test

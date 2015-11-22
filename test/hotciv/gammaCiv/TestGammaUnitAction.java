@@ -1,13 +1,11 @@
 package hotciv.gammaCiv;
 
 import hotciv.framework.Game;
-import hotciv.framework.GameConstants;
 import hotciv.framework.Position;
 import hotciv.standard.GameImpl;
 import hotciv.standard.UnitImpl;
+import hotciv.variance.AlphaCiv;
 import hotciv.variance.SimpleWorldWorldStrategy;
-import hotciv.variance.WinnerAlphaCivStrategy;
-import hotciv.variance.WorldAgingLinearStrategy;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -22,12 +20,10 @@ import static org.junit.Assert.assertThat;
 public class TestGammaUnitAction {
 
     private Game game;
-    private WorldAgingLinearStrategy agingLinearStrategy;
 
     @Before
     public void setupGame(){
-        game = new GameImpl(new WorldAgingLinearStrategy(), new WinnerAlphaCivStrategy(), new SimpleWorldWorldStrategy());
-        agingLinearStrategy = new WorldAgingLinearStrategy();
+        game = new GameImpl(new AlphaCiv(), new SimpleWorldWorldStrategy());
     }
 
     @Test

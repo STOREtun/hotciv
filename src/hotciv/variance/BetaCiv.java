@@ -1,12 +1,15 @@
 package hotciv.variance;
 
-import hotciv.framework.WorldAgingStrategy;
+import hotciv.framework.CivType;
+import hotciv.framework.Player;
+import hotciv.standard.CityImpl;
+
+import java.util.ArrayList;
 
 /**
- * Created by asger on 18/11/15.
- * The strategy follows the world aging algorithm found on page 463 in the SoftArk book
+ * Created by asger on 22/11/15.
  */
-public class WorldAgingBetaCivStrategy implements WorldAgingStrategy {
+public class BetaCiv implements CivType{
 
     private int worldAge;
 
@@ -46,7 +49,20 @@ public class WorldAgingBetaCivStrategy implements WorldAgingStrategy {
         return 0;
     }
 
-    /*
+    @Override
+    public Player calcWinner(ArrayList<CityImpl> cities) {
+        int count = 1;
+        Player firstCityOwner = cities.get(0).getOwner();
+        while (count < cities.size()){
+            Player nextCityOwner = cities.get(count).getOwner();
+            if (nextCityOwner.equals(firstCityOwner)){
+                count++;
+            } else return null;
+        }
+        return firstCityOwner;
+    }
+
+        /*
     * Methods to handle the different calculations
     */
 

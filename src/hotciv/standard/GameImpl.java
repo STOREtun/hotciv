@@ -1,8 +1,6 @@
 package hotciv.standard;
 
 import hotciv.framework.*;
-import hotciv.variance.WorldAgingLinearStrategy;
-import javafx.geometry.Pos;
 
 import java.util.*;
 
@@ -53,10 +51,9 @@ public class GameImpl implements Game {
     private TileImpl tile3;
 
     //World age strategy
-    private WorldAgingStrategy worldAgingStrategy;
-    private WinnerStrategy winnerStrategy;
+    private CivType civtype;
 
-    public GameImpl(WorldAgingStrategy worldAgingStrategy, WinnerStrategy winnerStrategy, WorldMapStrategy worldMapStrategy){
+    public GameImpl(CivType civtype, WorldMapStrategy worldMapStrategy){
         currentPlayerInTurn = Player.RED;
         worldAge = -4000;
 
@@ -83,9 +80,8 @@ public class GameImpl implements Game {
         positionCityMap.put(new Position(1,1), city1);
         positionCityMap.put(new Position(4,1), city2);
 
-        //World aging strategy
-        this.worldAgingStrategy = worldAgingStrategy;
-        this.winnerStrategy = winnerStrategy;
+        //Civ type
+        this.civtype = civtype;
     }
 
     public TileImpl getTileAt( Position p ) {
@@ -99,7 +95,6 @@ public class GameImpl implements Game {
     }
 
     public CityImpl getCityAt( Position p ) {
-
         return positionCityMap.get(p);
     }
 
@@ -112,7 +107,7 @@ public class GameImpl implements Game {
         ArrayList<CityImpl> cities = new ArrayList<>();
         cities.add(city1);
         cities.add(city2);
-        return winnerStrategy.calcWinner(cities);
+        return civtype.calcWinner(cities);
     }
 
     public int getAge() {
@@ -209,7 +204,7 @@ public class GameImpl implements Game {
                 city2.endProduction();
             } /* else alert player that there is no room for new units */
         }
-        worldAge = worldAgingStrategy.calcWorldAge(worldAge);
+        worldAge = civtype.calcWorldAge(worldAge);
     }
 
     public Position checkAdjacentTilesForUnit(Position p){
