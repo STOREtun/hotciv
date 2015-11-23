@@ -2,14 +2,17 @@ package hotciv.framework;
 
 /**
  * Created by sditlev on 23/11/15.
+ *
+ * This interface handles the different strategies defining the civ type
+ *
  */
 public interface Manager {
 
-    public WinnerStrategy getWinnerStrategy();
+    WinnerStrategy getWinnerStrategy();
 
-    public WorldAgingStrategy getWorldAgingStrategy();
+    WorldAgingStrategy getWorldAgingStrategy();
 
-    public WorldMapStrategy getWorldMapStrategy();
+    WorldMapStrategy getWorldMapStrategy();
 
-    public UnitActionStrategy getUnitActionStrategy();
+    UnitActionStrategy getUnitActionStrategy();
 }

@@ -1,25 +1,37 @@
 package hotciv.DeltaCiv;
 
-import hotciv.framework.Game;
-import hotciv.framework.Manager;
+import hotciv.framework.*;
 import hotciv.standard.GameImpl;
-import hotciv.variants.BetaManager;
+import hotciv.standard.TileImpl;
 import hotciv.variants.DeltaManager;
 import org.junit.Before;
+import org.junit.Test;
+import java.util.Map;
 
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 /**
  * Created by sditlev on 23/11/15.
  */
 public class TestDeltaCivWorldMap {
 
-    private Game game;
     private Manager manager;
 
     @Before
     public void setupGame(){
         manager = new DeltaManager();
-        game = new GameImpl(manager);
     }
 
-    
+    @Test
+    public void shouldStartWithCorrectWorldLayout() {
+        Map<Position, TileImpl> positionSpecialTileMap = manager.getWorldMapStrategy().getWorldLayout();
+
+        String oceanTile = positionSpecialTileMap.get(new Position(0,0)).getTypeString();
+        String mountainTile = positionSpecialTileMap.get(new Position(0,5)).getTypeString();
+
+        // delta map layout has ocean on tile (0,0) and mountain on (0,5)
+
+        assertThat("Tiletype is ocean", oceanTile, is("ocean"));
+        assertThat("Tiletype is mountain", mountainTile, is("mountain"));
+    }
 }

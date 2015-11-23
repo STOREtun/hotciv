@@ -14,10 +14,11 @@ public class GammaUnitActionStrategy implements UnitActionStrategy{
     @Override
     public void doUnitAction(GameImpl game, Position p) {
         UnitImpl unitActor = (UnitImpl) game.getUnitAt(p);
-        if (unitActor.getTypeString().equals(GameConstants.ARCHER)){
+        String unitType = unitActor.getTypeString();
+
+        if (unitType.equals(GameConstants.ARCHER)){
             unitActor.archerFortifyAction();
-        }
-        if (unitActor.getTypeString().equals(GameConstants.SETTLER)){
+        }else if (unitType.equals(GameConstants.SETTLER)){
             CityImpl city = new CityImpl(unitActor.getOwner());
             game.positionUnitMap.remove(p);
             game.positionCityMap.put(p, city);
