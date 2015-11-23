@@ -3,7 +3,7 @@ package hotciv.variants;
 import hotciv.framework.Position;
 import hotciv.framework.WorldMapStrategy;
 import hotciv.standard.TileImpl;
-import hotciv.standard.WorldMapGenrator;
+import hotciv.standard.WorldMapGenerator;
 
 import java.util.Map;
 
@@ -12,7 +12,7 @@ import java.util.Map;
  */
 public class DeltaWorldStrategy implements WorldMapStrategy {
 
-    WorldMapGenrator mapGenrator = new WorldMapGenrator();
+    WorldMapGenerator mapGenrator = new WorldMapGenerator();
 
     String[] layout =
             new String[] {

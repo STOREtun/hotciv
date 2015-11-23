@@ -45,16 +45,11 @@ public class GameImpl implements Game {
     private CityImpl city1;
     private CityImpl city2;
 
-    //Create tile instances
-    private TileImpl tile1;
-    private TileImpl tile2;
-    private TileImpl tile3;
-
     //Manager
     private Manager manager;
 
     public GameImpl(Manager manager){
-         this.manager = manager;
+        this.manager = manager;
         currentPlayerInTurn = Player.RED;
         worldAge = -4000;
 

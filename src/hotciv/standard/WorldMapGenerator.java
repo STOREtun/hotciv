@@ -10,7 +10,7 @@ import java.util.Map;
 /**
  * Created by sditlev on 21/11/15.
  */
-public class WorldMapGenrator {
+public class WorldMapGenerator {
     /** Define the world as the DeltaCiv layout */
     public Map<Position,TileImpl> defineWorld(String[] worldLayout) {
 
