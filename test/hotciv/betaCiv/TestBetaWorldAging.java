@@ -2,10 +2,11 @@ package hotciv.betaCiv;
 
 import hotciv.framework.CivType;
 import hotciv.framework.Game;
+import hotciv.framework.Manager;
 import hotciv.standard.GameImpl;
-import hotciv.variance.AlphaCiv;
-import hotciv.variance.BetaCiv;
-import hotciv.variance.SimpleWorldWorldStrategy;
+import hotciv.variants.BetaAgingStrategy;
+import hotciv.variants.BetaManager;
+import hotciv.variants.SimpleWorldWorldStrategy;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -18,12 +19,12 @@ import static org.junit.Assert.assertThat;
 public class TestBetaWorldAging {
 
     private Game game;
-    private CivType agingBetaCivStrategy;
+    private Manager manager;
 
     @Before
     public void setupGame(){
-        game = new GameImpl(new BetaCiv(), new SimpleWorldWorldStrategy());
-        agingBetaCivStrategy = new BetaCiv();
+        manager = new BetaManager();
+        game = new GameImpl(manager);
     }
 
     @Test
@@ -36,28 +37,28 @@ public class TestBetaWorldAging {
 
     @Test
     public void shouldIncrementWithinSequenceInBirthOfChrist() {
-        assertThat("Sequence is -100 to -1", agingBetaCivStrategy.calcWorldAge(-100), is(-1));
-        assertThat("Sequence is -100 to -1", agingBetaCivStrategy.calcWorldAge(-1), is(1));
-        assertThat("Sequence is -100 to -1", agingBetaCivStrategy.calcWorldAge(1), is(50));
+        assertThat("Sequence is -100 to -1", manager.getWorldAgingStrategy().calcWorldAge(-100), is(-1));
+        assertThat("Sequence is -100 to -1", manager.getWorldAgingStrategy().calcWorldAge(-1), is(1));
+        assertThat("Sequence is -100 to -1", manager.getWorldAgingStrategy().calcWorldAge(1), is(50));
     }
 
     @Test
     public void shouldIncrement50YearsBetween50ADAnd1750AD() {
-        assertThat("World age should increment with 50 years", agingBetaCivStrategy.calcWorldAge(50), is(100));
+        assertThat("World age should increment with 50 years", manager.getWorldAgingStrategy().calcWorldAge(50), is(100));
     }
 
     @Test
     public void shouldIncrementWith25Between1750ADAnd1900AD() {
-        assertThat("Should increment with 25 years", agingBetaCivStrategy.calcWorldAge(1750), is(1775));
+        assertThat("Should increment with 25 years", manager.getWorldAgingStrategy().calcWorldAge(1750), is(1775));
     }
 
     @Test
     public void shouldIncrement5YearsBetween1900ADAnd1970AD() {
-        assertThat("Should increment with 5 years", agingBetaCivStrategy.calcWorldAge(1900), is(1905));
+        assertThat("Should increment with 5 years", manager.getWorldAgingStrategy().calcWorldAge(1900), is(1905));
     }
 
     @Test
     public void shouldInrementWith1YearAfter1970AD() {
-        assertThat("Should increment with 1 year", agingBetaCivStrategy.calcWorldAge(1970), is(1971));
+        assertThat("Should increment with 1 year", manager.getWorldAgingStrategy().calcWorldAge(1970), is(1971));
     }
 }

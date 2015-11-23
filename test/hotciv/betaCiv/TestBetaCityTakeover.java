@@ -4,8 +4,8 @@ import hotciv.framework.Game;
 import hotciv.framework.Player;
 import hotciv.framework.Position;
 import hotciv.standard.GameImpl;
-import hotciv.variance.BetaCiv;
-import hotciv.variance.SimpleWorldWorldStrategy;
+import hotciv.variants.BetaManager;
+import hotciv.variants.SimpleWorldWorldStrategy;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -21,7 +21,7 @@ public class TestBetaCityTakeover {
 
     @Before
     public void setupGame() {
-        game = new GameImpl(new BetaCiv(), new SimpleWorldWorldStrategy());
+        game = new GameImpl(new BetaManager());
     }
 
     @Test

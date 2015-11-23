@@ -1,7 +1,6 @@
-package hotciv.variance;
+package hotciv.variants;
 
 import hotciv.framework.Position;
-import hotciv.framework.Tile;
 import hotciv.framework.WorldMapStrategy;
 import hotciv.standard.TileImpl;
 import hotciv.standard.WorldMapGenrator;

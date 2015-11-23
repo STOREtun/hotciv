@@ -1,16 +1,11 @@
-package hotciv.variance;
+package hotciv.variants;
 
-import hotciv.framework.CivType;
-import hotciv.framework.Player;
-import hotciv.standard.CityImpl;
-
-import java.util.ArrayList;
+import hotciv.framework.WorldAgingStrategy;
 
 /**
- * Created by asger on 22/11/15.
+ * Created by sditlev on 23/11/15.
  */
-public class BetaCiv implements CivType{
-
+public class BetaAgingStrategy implements WorldAgingStrategy{
     private int worldAge;
 
     @Override
@@ -49,22 +44,6 @@ public class BetaCiv implements CivType{
         return 0;
     }
 
-    @Override
-    public Player calcWinner(ArrayList<CityImpl> cities) {
-        int count = 1;
-        Player firstCityOwner = cities.get(0).getOwner();
-        while (count < cities.size()){
-            Player nextCityOwner = cities.get(count).getOwner();
-            if (nextCityOwner.equals(firstCityOwner)){
-                count++;
-            } else return null;
-        }
-        return firstCityOwner;
-    }
-
-        /*
-    * Methods to handle the different calculations
-    */
 
     public boolean isBetween4000BCAnd100BC(){
         return (worldAge >= -4000 && worldAge < -100);

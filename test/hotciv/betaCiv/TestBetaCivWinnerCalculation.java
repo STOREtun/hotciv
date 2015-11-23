@@ -1,13 +1,10 @@
 package hotciv.betaCiv;
 
-import hotciv.framework.CivType;
-import hotciv.framework.Game;
-import hotciv.framework.Player;
-import hotciv.framework.Position;
+import hotciv.framework.*;
 import hotciv.standard.CityImpl;
 import hotciv.standard.GameImpl;
-import hotciv.variance.BetaCiv;
-import hotciv.variance.SimpleWorldWorldStrategy;
+import hotciv.variants.BetaManager;
+import hotciv.variants.SimpleWorldWorldStrategy;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -25,31 +22,7 @@ public class TestBetaCivWinnerCalculation {
 
     @Before
     public void setupGame() {
-        game = new GameImpl(new BetaCiv(), new SimpleWorldWorldStrategy());
-    }
-
-    @Test
-    public void shouldletBlueWinWhenTakenOverRedCity() {
-        CivType beta = new BetaCiv();
-        ArrayList<CityImpl> testCities = new ArrayList<>();
-        testCities.add(new CityImpl(Player.BLUE));
-        testCities.add(new CityImpl(Player.BLUE));
-        testCities.add(new CityImpl(Player.BLUE));
-        testCities.add(new CityImpl(Player.BLUE));
-        testCities.add(new CityImpl(Player.BLUE));
-        assertThat("Should return blue as winner", beta.calcWinner(testCities), is(Player.BLUE));
-    }
-
-    @Test
-    public void shouldReturnNullOnNoWinnerYet() {
-        CivType beta = new BetaCiv();
-        ArrayList<CityImpl> testCities = new ArrayList<>();
-        testCities.add(new CityImpl(Player.BLUE));
-        testCities.add(new CityImpl(Player.BLUE));
-        testCities.add(new CityImpl(Player.BLUE));
-        testCities.add(new CityImpl(Player.BLUE));
-        testCities.add(new CityImpl(Player.RED));
-        assertNull(beta.calcWinner(testCities));
+        game = new GameImpl(new BetaManager());
     }
 
     @Test

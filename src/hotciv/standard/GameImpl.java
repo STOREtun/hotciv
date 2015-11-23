@@ -37,8 +37,8 @@ public class GameImpl implements Game {
     private int worldAge;
 
     //Maps
-    private Map<Position, UnitImpl> positionUnitMap;
-    private Map<Position, CityImpl> positionCityMap;
+    public Map<Position, UnitImpl> positionUnitMap;
+    public Map<Position, CityImpl> positionCityMap;
     private Map<Position, TileImpl> positionSpecialTileMap;
 
     //Create city instance
@@ -50,10 +50,11 @@ public class GameImpl implements Game {
     private TileImpl tile2;
     private TileImpl tile3;
 
-    //World age strategy
-    private CivType civtype;
+    //Manager
+    private Manager manager;
 
-    public GameImpl(CivType civtype, WorldMapStrategy worldMapStrategy){
+    public GameImpl(Manager manager){
+         this.manager = manager;
         currentPlayerInTurn = Player.RED;
         worldAge = -4000;
 
@@ -64,7 +65,7 @@ public class GameImpl implements Game {
         //Create hash maps of units
         positionUnitMap = new HashMap<Position, UnitImpl>();
         positionCityMap = new HashMap<Position, CityImpl>();
-        positionSpecialTileMap = worldMapStrategy.getWorldLayout();
+        positionSpecialTileMap = manager.getWorldMapStrategy().getWorldLayout();
 
         //Create units
         UnitImpl redUnit1 = new UnitImpl(Player.RED, GameConstants.ARCHER);
@@ -79,9 +80,6 @@ public class GameImpl implements Game {
         //Add cities to city map
         positionCityMap.put(new Position(1,1), city1);
         positionCityMap.put(new Position(4,1), city2);
-
-        //Civ type
-        this.civtype = civtype;
     }
 
     public TileImpl getTileAt( Position p ) {
@@ -104,10 +102,7 @@ public class GameImpl implements Game {
 
     /* Could be called after city takeover */
     public Player getWinner() {
-        ArrayList<CityImpl> cities = new ArrayList<>();
-        cities.add(city1);
-        cities.add(city2);
-        return civtype.calcWinner(cities);
+        return manager.getWinnerStrategy().calcWinner(this);
     }
 
     public int getAge() {
@@ -173,15 +168,7 @@ public class GameImpl implements Game {
     }
 
     public void performUnitActionAt( Position p ) {
-        UnitImpl unitActor = (UnitImpl) getUnitAt(p);
-        if (unitActor.getTypeString().equals(GameConstants.ARCHER)){
-            unitActor.archerFortifyAction();
-        }
-        if (unitActor.getTypeString().equals(GameConstants.SETTLER)){
-            CityImpl city = new CityImpl(unitActor.getOwner());
-            positionUnitMap.remove(p);
-            positionCityMap.put(p, city);
-        }
+        manager.getUnitActionStrategy().doUnitAction(this, p);
     }
 
     public void configureNewRound(){
@@ -204,7 +191,11 @@ public class GameImpl implements Game {
                 city2.endProduction();
             } /* else alert player that there is no room for new units */
         }
-        worldAge = civtype.calcWorldAge(worldAge);
+        worldAge = manager.getWorldAgingStrategy().calcWorldAge(worldAge);
+    }
+
+    public Map<Position, CityImpl> getCityMap(){
+        return positionCityMap;
     }
 
     public Position checkAdjacentTilesForUnit(Position p){
