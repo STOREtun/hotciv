@@ -1,12 +1,9 @@
 package hotciv.betaCiv;
 
-import hotciv.framework.CivType;
 import hotciv.framework.Game;
 import hotciv.framework.Manager;
 import hotciv.standard.GameImpl;
-import hotciv.variants.BetaAgingStrategy;
 import hotciv.variants.BetaManager;
-import hotciv.variants.SimpleWorldWorldStrategy;
 import org.junit.Before;
 import org.junit.Test;
 
