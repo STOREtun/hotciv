@@ -116,7 +116,7 @@ public class GameImpl implements Game {
         Player unitOwner = movingUnit.getOwner();
 
         boolean playerInTurnMovingUnit = unitOwner.equals(currentPlayerInTurn);
-        if(playerInTurnMovingUnit && isValidMove(x, y, to)){
+        if(playerInTurnMovingUnit && isValidMove(x, y, to) && movingUnit.isMovable()){
             if(getCityAt(to) != null) {           // there is a city at the to tile
                 if (!getCityAt(to).getOwner().equals(currentPlayerInTurn)) {
                     getCityAt(to).changeOwner(currentPlayerInTurn);

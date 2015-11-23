@@ -13,9 +13,9 @@ public class UnitImpl implements Unit {
     private int defensiveStrength;
     private boolean fortified;
 
-    public UnitImpl(Player _owner, String _unitType) {
-        this.owner = _owner;
-        this.unitType = _unitType;
+    public UnitImpl(Player owner, String unitType) {
+        this.owner = owner;
+        this.unitType = unitType;
         defensiveStrength = 3;
     }
 
@@ -42,6 +42,12 @@ public class UnitImpl implements Unit {
     @Override
     public int getAttackingStrength() {
         return 0;
+    }
+
+    public boolean isMovable(){
+        if (fortified){
+            return false;
+        } else return true;
     }
 
     public void archerFortifyAction(){
