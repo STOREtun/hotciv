@@ -40,7 +40,7 @@ public class TestGammaUnitAction {
     public void shouldLetSettlerCreateCityOnAction() {
         Position settlerPos = new Position(4,3);
         UnitImpl settler = (UnitImpl) game.getUnitAt(settlerPos);
-        assertThat("No city at settler pos", game.getCityAt(settlerPos), is(nullValue()));
+        assertThat("No city at settler pos", settler, is(nullValue()));
         game.performUnitActionAt(settlerPos);
         assertThat("City at location", game.getCityAt(settlerPos), is(notNullValue()));
     }
