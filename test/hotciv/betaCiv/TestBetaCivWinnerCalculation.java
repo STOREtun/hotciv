@@ -2,7 +2,7 @@ package hotciv.betaCiv;
 
 import hotciv.framework.*;
 import hotciv.standard.GameImpl;
-import hotciv.variants.BetaManager;
+import hotciv.variants.BetaCiv.BetaFactory;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -19,7 +19,7 @@ public class TestBetaCivWinnerCalculation {
 
     @Before
     public void setupGame() {
-        game = new GameImpl(new BetaManager());
+        game = new GameImpl(new BetaFactory());
     }
 
     @Test

@@ -1,11 +1,15 @@
-package hotciv.variants;
+package hotciv.variants.GammaCiv;
 
 import hotciv.framework.*;
+import hotciv.variants.AlphaCiv.AlphaAttackStrategy;
+import hotciv.variants.AlphaCiv.AlphaWorldStrategy;
+import hotciv.variants.BetaCiv.BetaAgingStrategy;
+import hotciv.variants.BetaCiv.BetaWinnerStrategy;
 
 /**
  * Created by sditlev on 23/11/15.
  */
-public class GammaManager implements Manager{
+public class GammaFactory implements Factory {
     @Override
     public WinnerStrategy getWinnerStrategy() {
         return new BetaWinnerStrategy();
@@ -18,11 +22,16 @@ public class GammaManager implements Manager{
 
     @Override
     public WorldMapStrategy getWorldMapStrategy() {
-        return new AlphaWorldWorldStrategy();
+        return new AlphaWorldStrategy();
     }
 
     @Override
     public UnitActionStrategy getUnitActionStrategy() {
         return new GammaUnitActionStrategy();
+    }
+
+    @Override
+    public AttackInterface getAttackStrategy() {
+        return new AlphaAttackStrategy();
     }
 }

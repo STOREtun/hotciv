@@ -4,7 +4,7 @@ import hotciv.framework.Game;
 import hotciv.framework.Player;
 import hotciv.framework.Position;
 import hotciv.standard.GameImpl;
-import hotciv.variants.BetaManager;
+import hotciv.variants.BetaCiv.BetaFactory;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -20,7 +20,7 @@ public class TestBetaCityTakeover {
 
     @Before
     public void setupGame() {
-        game = new GameImpl(new BetaManager());
+        game = new GameImpl(new BetaFactory());
     }
 
     @Test

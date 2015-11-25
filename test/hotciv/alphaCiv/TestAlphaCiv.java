@@ -3,7 +3,7 @@ import hotciv.framework.*;
 
 import hotciv.standard.CityImpl;
 import hotciv.standard.GameImpl;
-import hotciv.variants.AlphaManager;
+import hotciv.variants.AlphaCiv.AlphaFactory;
 import org.junit.*;
 
 import static org.junit.Assert.*;
@@ -42,7 +42,7 @@ public class TestAlphaCiv {
     /** Fixture for alphaCiv testing. */
     @Before
     public void setUp() {
-        game = new GameImpl(new AlphaManager());
+        game = new GameImpl(new AlphaFactory());
     }
 
     @Test

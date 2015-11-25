@@ -1,9 +1,9 @@
 package hotciv.betaCiv;
 
 import hotciv.framework.Game;
-import hotciv.framework.Manager;
+import hotciv.framework.Factory;
 import hotciv.standard.GameImpl;
-import hotciv.variants.BetaManager;
+import hotciv.variants.BetaCiv.BetaFactory;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -16,11 +16,11 @@ import static org.junit.Assert.assertThat;
 public class TestBetaWorldAging {
 
     private Game game;
-    private Manager manager;
+    private Factory manager;
 
     @Before
     public void setupGame(){
-        manager = new BetaManager();
+        manager = new BetaFactory();
         game = new GameImpl(manager);
     }
 

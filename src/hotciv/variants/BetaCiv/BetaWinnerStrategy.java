@@ -1,4 +1,4 @@
-package hotciv.variants;
+package hotciv.variants.BetaCiv;
 
 import hotciv.framework.*;
 import hotciv.standard.CityImpl;

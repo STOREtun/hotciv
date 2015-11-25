@@ -1,11 +1,11 @@
-package hotciv.variants;
+package hotciv.variants.AlphaCiv;
 
 import hotciv.framework.*;
 
 /**
  * Created by sditlev on 23/11/15.
  */
-public class AlphaManager implements Manager {
+public class AlphaFactory implements Factory {
     @Override
     public WinnerStrategy getWinnerStrategy() {
         return new AlphaWinnerStrategy();
@@ -18,10 +18,15 @@ public class AlphaManager implements Manager {
 
     @Override
     public WorldMapStrategy getWorldMapStrategy() {
-        return new AlphaWorldWorldStrategy();
+        return new AlphaWorldStrategy();
     }
     @Override
     public UnitActionStrategy getUnitActionStrategy() {
         return null;
+    }
+
+    @Override
+    public AttackInterface getAttackStrategy() {
+        return new AlphaAttackStrategy();
     }
 }

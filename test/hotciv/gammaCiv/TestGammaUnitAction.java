@@ -4,7 +4,7 @@ import hotciv.framework.Game;
 import hotciv.framework.Position;
 import hotciv.standard.GameImpl;
 import hotciv.standard.UnitImpl;
-import hotciv.variants.GammaManager;
+import hotciv.variants.GammaCiv.GammaFactory;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -22,7 +22,7 @@ public class TestGammaUnitAction {
 
     @Before
     public void setupGame(){
-        game = new GameImpl(new GammaManager());
+        game = new GameImpl(new GammaFactory());
     }
 
     @Test

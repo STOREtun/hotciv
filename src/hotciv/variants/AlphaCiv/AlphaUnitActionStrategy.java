@@ -1,16 +1,15 @@
-package hotciv.variants;
+package hotciv.variants.AlphaCiv;
 
 import hotciv.framework.Position;
 import hotciv.framework.UnitActionStrategy;
 import hotciv.standard.GameImpl;
 
 /**
- * Created by asger on 23/11/15.
+ * Created by sditlev on 23/11/15.
  */
-public class AlphaUnitStrategy implements UnitActionStrategy {
-
+public class AlphaUnitActionStrategy implements UnitActionStrategy {
     @Override
     public void doUnitAction(GameImpl game, Position p) {
-        // not used
+
     }
 }

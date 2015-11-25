@@ -1,11 +1,14 @@
-package hotciv.variants;
+package hotciv.variants.BetaCiv;
 
 import hotciv.framework.*;
+import hotciv.variants.AlphaCiv.AlphaAttackStrategy;
+import hotciv.variants.AlphaCiv.AlphaUnitActionStrategy;
+import hotciv.variants.AlphaCiv.AlphaWorldStrategy;
 
 /**
  * Created by sditlev on 23/11/15.
  */
-public class BetaManager implements Manager {
+public class BetaFactory implements Factory {
     @Override
     public WinnerStrategy getWinnerStrategy() {
         return new BetaWinnerStrategy();
@@ -18,11 +21,16 @@ public class BetaManager implements Manager {
 
     @Override
     public WorldMapStrategy getWorldMapStrategy() {
-        return new AlphaWorldWorldStrategy();
+        return new AlphaWorldStrategy();
     }
 
     @Override
     public UnitActionStrategy getUnitActionStrategy() {
         return new AlphaUnitActionStrategy();
+    }
+
+    @Override
+    public AttackInterface getAttackStrategy() {
+        return new AlphaAttackStrategy();
     }
 }

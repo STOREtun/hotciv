@@ -1,4 +1,4 @@
-package hotciv.variants;
+package hotciv.variants.AlphaCiv;
 
 import hotciv.framework.WorldAgingStrategy;
 

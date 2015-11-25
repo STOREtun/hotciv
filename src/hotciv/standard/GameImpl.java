@@ -1,6 +1,7 @@
 package hotciv.standard;
 
 import hotciv.framework.*;
+import hotciv.variants.RandomDie;
 
 import java.util.*;
 
@@ -45,11 +46,11 @@ public class GameImpl implements Game {
     private CityImpl city1;
     private CityImpl city2;
 
-    //Manager
-    private Manager manager;
+    //Factory
+    private Factory factory;
 
-    public GameImpl(Manager manager){
-        this.manager = manager;
+    public GameImpl(Factory factory){
+        this.factory = factory;
         currentPlayerInTurn = Player.RED;
         worldAge = -4000;
 
@@ -60,7 +61,7 @@ public class GameImpl implements Game {
         //Create hash maps of units
         positionUnitMap = new HashMap<Position, UnitImpl>();
         positionCityMap = new HashMap<Position, CityImpl>();
-        positionSpecialTileMap = manager.getWorldMapStrategy().getWorldLayout();
+        positionSpecialTileMap = factory.getWorldMapStrategy().getWorldLayout();
 
         //Create units
         UnitImpl redUnit1 = new UnitImpl(Player.RED, GameConstants.ARCHER);
@@ -97,7 +98,7 @@ public class GameImpl implements Game {
 
     /* Could be called after city takeover */
     public Player getWinner() {
-        return manager.getWinnerStrategy().calcWinner(this);
+        return factory.getWinnerStrategy().calcWinner(this);
     }
 
     public int getAge() {
@@ -128,9 +129,11 @@ public class GameImpl implements Game {
 
             boolean enemyUnitPresentOnDestinationTile = !positionUnitMap.get(to).getOwner().equals(currentPlayerInTurn);
             if (enemyUnitPresentOnDestinationTile){
-                positionUnitMap.replace(to, movingUnit); // kill and replace the unit
-                positionUnitMap.remove(from);
-                return true;
+               if(factory.getAttackStrategy().attackSuccessful(from, to, this)){
+                   positionUnitMap.replace(to, movingUnit); // kill and replace the unit
+                   positionUnitMap.remove(from);
+                   return true;
+               }else positionUnitMap.remove(from);
             }
         }
 //        System.err.println("Move made by: " + currentPlayerInTurn + " is not valid");
@@ -163,7 +166,7 @@ public class GameImpl implements Game {
     }
 
     public void performUnitActionAt( Position p ) {
-        manager.getUnitActionStrategy().doUnitAction(this, p);
+        factory.getUnitActionStrategy().doUnitAction(this, p);
     }
 
     public void configureNewRound(){
@@ -186,7 +189,7 @@ public class GameImpl implements Game {
                 city2.endProduction();
             } /* else alert player that there is no room for new units */
         }
-        worldAge = manager.getWorldAgingStrategy().calcWorldAge(worldAge);
+        worldAge = factory.getWorldAgingStrategy().calcWorldAge(worldAge);
     }
 
     public Map<Position, CityImpl> getCityMap(){

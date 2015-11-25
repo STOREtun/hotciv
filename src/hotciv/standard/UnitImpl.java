@@ -10,13 +10,38 @@ import hotciv.framework.Unit;
 public class UnitImpl implements Unit {
     private Player owner;
     private String unitType;
+
     private int defensiveStrength;
-    private boolean fortified;
+    private int attackingStrength;
+    private int cost;
+
+    private boolean movable;
 
     public UnitImpl(Player owner, String unitType) {
         this.owner = owner;
         this.unitType = unitType;
-        defensiveStrength = 3;
+        this.movable = true;
+
+        switch (unitType){
+            case "archer":
+                defensiveStrength = 3;
+                attackingStrength = 2;
+                cost = 10;
+                break;
+
+            case "settler":
+                defensiveStrength = 3;
+                attackingStrength = 0;
+                cost = 30;
+                break;
+
+            case "legion":
+                attackingStrength = 4;
+                defensiveStrength = 2;
+                cost = 15;
+                break;
+        }
+
     }
 
     @Override
@@ -41,22 +66,20 @@ public class UnitImpl implements Unit {
 
     @Override
     public int getAttackingStrength() {
-        return 0;
+        return attackingStrength;
     }
 
     public boolean isMovable(){
-        if (fortified){
-            return false;
-        } else return true;
+        return movable;
     }
 
     public void archerFortifyAction(){
-        if (fortified) {
+        if (!movable) {
             defensiveStrength = defensiveStrength / 2;
         } else {
             defensiveStrength = defensiveStrength * 2;
         }
-        fortified = !fortified;
+        movable = !movable;
 
     }
 }

@@ -6,7 +6,7 @@ package hotciv.framework;
  * This interface handles the different strategies defining the civ type
  *
  */
-public interface Manager {
+public interface Factory {
 
     WinnerStrategy getWinnerStrategy();
 
@@ -15,4 +15,6 @@ public interface Manager {
     WorldMapStrategy getWorldMapStrategy();
 
     UnitActionStrategy getUnitActionStrategy();
+
+    AttackInterface getAttackStrategy();
 }

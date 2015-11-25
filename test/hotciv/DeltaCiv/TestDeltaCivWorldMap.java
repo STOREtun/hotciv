@@ -1,9 +1,8 @@
 package hotciv.DeltaCiv;
 
 import hotciv.framework.*;
-import hotciv.standard.GameImpl;
 import hotciv.standard.TileImpl;
-import hotciv.variants.DeltaManager;
+import hotciv.variants.DeltaCiv.DeltaFactory;
 import org.junit.Before;
 import org.junit.Test;
 import java.util.Map;
@@ -15,11 +14,11 @@ import static org.junit.Assert.assertThat;
  */
 public class TestDeltaCivWorldMap {
 
-    private Manager manager;
+    private Factory manager;
 
     @Before
     public void setupGame(){
-        manager = new DeltaManager();
+        manager = new DeltaFactory();
     }
 
     @Test

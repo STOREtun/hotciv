@@ -1,4 +1,4 @@
-package hotciv.variants;
+package hotciv.variants.AlphaCiv;
 
 import hotciv.framework.Position;
 import hotciv.framework.WorldMapStrategy;
@@ -10,7 +10,7 @@ import java.util.Map;
 /**
  * Created by sditlev on 21/11/15.
  */
-public class AlphaWorldWorldStrategy implements WorldMapStrategy {
+public class AlphaWorldStrategy implements WorldMapStrategy {
 
     WorldMapGenerator mapGenerator = new WorldMapGenerator();
 
