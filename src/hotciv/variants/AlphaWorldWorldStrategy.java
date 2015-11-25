@@ -10,7 +10,7 @@ import java.util.Map;
 /**
  * Created by sditlev on 21/11/15.
  */
-public class SimpleWorldWorldStrategy implements WorldMapStrategy {
+public class AlphaWorldWorldStrategy implements WorldMapStrategy {
 
     WorldMapGenerator mapGenerator = new WorldMapGenerator();
 

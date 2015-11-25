@@ -4,9 +4,7 @@ import hotciv.framework.Game;
 import hotciv.framework.Position;
 import hotciv.standard.GameImpl;
 import hotciv.standard.UnitImpl;
-import hotciv.variants.AlphaManager;
 import hotciv.variants.GammaManager;
-import hotciv.variants.SimpleWorldWorldStrategy;
 import org.junit.Before;
 import org.junit.Test;
 

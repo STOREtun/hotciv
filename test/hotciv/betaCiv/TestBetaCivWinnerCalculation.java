@@ -1,10 +1,8 @@
 package hotciv.betaCiv;
 
 import hotciv.framework.*;
-import hotciv.standard.CityImpl;
 import hotciv.standard.GameImpl;
 import hotciv.variants.BetaManager;
-import hotciv.variants.SimpleWorldWorldStrategy;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -12,7 +10,6 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 import static org.hamcrest.CoreMatchers.is;
-import java.util.ArrayList;
 
 /**
  * Created by sditlev on 20/11/15.

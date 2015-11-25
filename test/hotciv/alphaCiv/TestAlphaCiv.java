@@ -4,7 +4,6 @@ import hotciv.framework.*;
 import hotciv.standard.CityImpl;
 import hotciv.standard.GameImpl;
 import hotciv.variants.AlphaManager;
-import hotciv.variants.SimpleWorldWorldStrategy;
 import org.junit.*;
 
 import static org.junit.Assert.*;

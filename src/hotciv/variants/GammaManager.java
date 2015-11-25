@@ -18,7 +18,7 @@ public class GammaManager implements Manager{
 
     @Override
     public WorldMapStrategy getWorldMapStrategy() {
-        return new SimpleWorldWorldStrategy();
+        return new AlphaWorldWorldStrategy();
     }
 
     @Override
