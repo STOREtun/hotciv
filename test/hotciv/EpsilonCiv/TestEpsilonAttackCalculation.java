@@ -44,7 +44,7 @@ public class TestEpsilonAttackCalculation {
 
     @Test
     public void shouldLetArcherWinOverSettlerWithEpsilonAttackAlgorithm() {
-        boolean didMove = game.moveUnit(new Position(10,10), new Position(11,10));
+        assertTrue(game.moveUnit(new Position(10,10), new Position(11,10)));
         assertNull(game.getUnitAt(new Position(10, 10)));
         assertThat("This is now an archer", game.getUnitAt(new Position(11,10)).getTypeString(), is(GameConstants.ARCHER));
     }
