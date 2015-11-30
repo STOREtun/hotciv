@@ -20,7 +20,5 @@ public interface WinnerStrategy {
      * @param the winning attacking player
      * @param current worldAge
      */
-    void updateWinCount(Player player);
-
-    void incrementRoundCounter();
+    void updateWinCount(Player player, int roundCount);
 }

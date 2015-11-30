@@ -18,7 +18,7 @@ import static org.junit.Assert.assertTrue;
 /**
  * Created by asger on 30/11/15.
  */
-public class TestZetaWinner {
+public class TestZetaWinnerStrategy {
 
     private GameImpl game;
 
@@ -27,28 +27,10 @@ public class TestZetaWinner {
         game = new GameImpl(new ZetaFactory());
     }
 
-    /*
-     * This test method works because we know there are only 2 cities
-     * (it is a copy of BetaCiv's test of winner)
-     */
-    @Test
-    public void shouldUseBetaIfLessThan20RoundsHasPassed() {
-        assertNull(game.getWinner()); // no winner yet
-
-        assertThat("Owner is initial blue", game.getCityAt(new Position(4,1)).getOwner(), is(Player.BLUE));
-        assertTrue(game.moveUnit(new Position(2, 0), new Position(3, 1)));
-
-        game.endOfTurn();
-        game.endOfTurn();
-
-        assertTrue(game.moveUnit(new Position(3, 1), new Position(4, 1)));
-        assertThat("Owner should be Red", game.getCityAt(new Position(4,1)).getOwner(), is(Player.RED));
-        assertThat("Winner is Red", game.getWinner(), is(Player.RED));
-    }
-
     @Test
     public void shouldUseEpsilonStrategyIfMoreThan20RoundsHasPassed() {
-        passTwentyRounds();
+        for(int x = 0; x <= 19; x++) game.configureNewRound(); // passing 20 rounds
+
         assertThat("World age is now -2000. Meaning 20 rounds passed in alphaAgingStrategy terms",
                 game.getAge(), is(-2000));
 
@@ -75,7 +57,20 @@ public class TestZetaWinner {
         assertThat("Winner is blue", game.getWinner(), is(Player.BLUE));
     }
 
-    public void passTwentyRounds(){
-        for(int x = 0; x <= 19; x++) game.configureNewRound();
+    @Test
+    public void shouldUseBetaStrategyIfLessThan20RoundsHasPassed() {
+        GameImpl game = new GameImpl(new ZetaFactory());
+        assertNull(game.getWinner()); // no winner yet
+
+        assertThat("Owner is initial blue", game.getCityAt(new Position(4,1)).getOwner(), is(Player.BLUE));
+        assertTrue(game.moveUnit(new Position(2, 0), new Position(3, 1)));
+
+        game.endOfTurn();
+        game.endOfTurn();
+
+        assertTrue(game.moveUnit(new Position(3, 1), new Position(4, 1)));
+        assertThat("Owner should be Red", game.getCityAt(new Position(4,1)).getOwner(), is(Player.RED));
+        assertThat("Winner is Red", game.getWinner(), is(Player.RED));
+
     }
 }

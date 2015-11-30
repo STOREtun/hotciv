@@ -35,6 +35,7 @@ public class GameImpl implements Game {
     //game variables
     private Player currentPlayerInTurn;
     private int worldAge;
+    private int roundCount;
 
     //Maps
     public Map<Position, UnitImpl> positionUnitMap;
@@ -52,6 +53,7 @@ public class GameImpl implements Game {
         this.factory = factory;
         currentPlayerInTurn = Player.RED;
         worldAge = -4000;
+        roundCount = 0;
 
         //Create cities
         city1 = new CityImpl(Player.RED);
@@ -135,7 +137,7 @@ public class GameImpl implements Game {
             if (enemyUnitPresentOnDestinationTile){
                if(factory.getAttackStrategy().attackSuccessful(from, to, this)){
                    Player winner = getUnitAt(from).getOwner();
-                   factory.getWinnerStrategy().updateWinCount(winner);
+                   factory.getWinnerStrategy().updateWinCount(winner, roundCount);
                    positionUnitMap.replace(to, movingUnit); // kill and replace the unit
                    positionUnitMap.remove(from);
                    return true;
@@ -197,8 +199,11 @@ public class GameImpl implements Game {
         }
 
         worldAge = factory.getWorldAgingStrategy().calcWorldAge(worldAge);
-//        System.out.println("GameImpl, configuring new round. WorldAge is now: " + worldAge);
-        factory.getWinnerStrategy().incrementRoundCounter();
+        roundCount = roundCount + 1;
+    }
+
+    public int getRoundCount(){
+        return roundCount;
     }
 
     public Map<Position, CityImpl> getCityMap(){

@@ -25,15 +25,10 @@ public class EpsilonWinnerStrategy implements WinnerStrategy {
     }
 
     @Override
-    public void updateWinCount(Player player) {
+    public void updateWinCount(Player player, int roundCount) {
         if (playerWinCount.containsKey(player)){
             int currentWins = playerWinCount.get(player);
             playerWinCount.replace(player, currentWins + 1);
         } else playerWinCount.put(player, 1);
-    }
-
-    @Override
-    public void incrementRoundCounter() {
-        // not used
     }
 }

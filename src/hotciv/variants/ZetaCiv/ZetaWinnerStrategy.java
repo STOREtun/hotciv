@@ -12,8 +12,6 @@ import java.util.HashMap;
  * Created by sditlev on 30/11/15.
  */
 public class ZetaWinnerStrategy implements WinnerStrategy {
-    static private int roundCounter;
-
     EpsilonWinnerStrategy epsilonWinnerStrategy;
     BetaWinnerStrategy betaWinnerStrategy;
 
@@ -24,7 +22,7 @@ public class ZetaWinnerStrategy implements WinnerStrategy {
 
     @Override
     public Player calcWinner(GameImpl game) {
-        if(roundCounter >= 20){
+        if(game.getRoundCount() >= 20){
             return epsilonWinnerStrategy.calcWinner(game);
         }else{
             return betaWinnerStrategy.calcWinner(game);
@@ -32,12 +30,7 @@ public class ZetaWinnerStrategy implements WinnerStrategy {
     }
 
     @Override
-    public void updateWinCount(Player player) {
-        if(roundCounter >= 20) epsilonWinnerStrategy.updateWinCount(player);
-    }
-
-    @Override
-    public void incrementRoundCounter() {
-        roundCounter = roundCounter + 1;
+    public void updateWinCount(Player player, int roundCounter) {
+        if(roundCounter >= 20) epsilonWinnerStrategy.updateWinCount(player, roundCounter);
     }
 }
