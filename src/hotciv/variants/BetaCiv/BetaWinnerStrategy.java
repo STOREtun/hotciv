@@ -31,5 +31,11 @@ public class BetaWinnerStrategy implements WinnerStrategy{
 
     @Override
     public void updateWinCount(Player player) {
+        // not used
+    }
+
+    @Override
+    public void incrementRoundCounter() {
+        // not used
     }
 }

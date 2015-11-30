@@ -63,14 +63,14 @@ public class GameImpl implements Game {
         positionSpecialTileMap = factory.getWorldMapStrategy().getWorldLayout();
 
         //Create units
-        UnitImpl redUnit1 = new UnitImpl(Player.RED, GameConstants.ARCHER);
-        UnitImpl blueUnit2 = new UnitImpl(Player.BLUE, GameConstants.LEGION);
-        UnitImpl redUnit2 = new UnitImpl(Player.RED, GameConstants.SETTLER);
+        UnitImpl blueLegion = new UnitImpl(Player.BLUE, GameConstants.LEGION);
+        UnitImpl redArcher = new UnitImpl(Player.RED, GameConstants.ARCHER);
+        UnitImpl redSettler = new UnitImpl(Player.RED, GameConstants.SETTLER);
 
         //add units to unit map
-        positionUnitMap.put(new Position(2,0), redUnit1);
-        positionUnitMap.put(new Position(3,2), blueUnit2);
-        positionUnitMap.put(new Position(4,3), redUnit2);
+        positionUnitMap.put(new Position(3,2), blueLegion);
+        positionUnitMap.put(new Position(2,0), redArcher);
+        positionUnitMap.put(new Position(4,3), redSettler);
 
         //Add cities to city map
         positionCityMap.put(new Position(1,1), city1);
@@ -195,7 +195,10 @@ public class GameImpl implements Game {
                 city2.endProduction();
             } /* else alert player that there is no room for new units */
         }
+
         worldAge = factory.getWorldAgingStrategy().calcWorldAge(worldAge);
+//        System.out.println("GameImpl, configuring new round. WorldAge is now: " + worldAge);
+        factory.getWinnerStrategy().incrementRoundCounter();
     }
 
     public Map<Position, CityImpl> getCityMap(){

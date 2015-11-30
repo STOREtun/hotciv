@@ -16,5 +16,11 @@ public interface WinnerStrategy {
      */
     Player calcWinner(GameImpl game);
 
+    /** Update the winner count
+     * @param the winning attacking player
+     * @param current worldAge
+     */
     void updateWinCount(Player player);
+
+    void incrementRoundCounter();
 }

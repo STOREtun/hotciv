@@ -11,9 +11,15 @@ import hotciv.variants.AlphaCiv.AlphaWorldStrategy;
  */
 public class ZetaFactory implements Factory {
 
+    //private ZetaWinnerStrategy zetaWinnerStrategy; // zeta keeps count of number of rounds
+
+//    public ZetaFactory() {
+//        this.zetaWinnerStrategy = new ZetaWinnerStrategy();
+//    }
+
     @Override
     public WinnerStrategy getWinnerStrategy() {
-        return new ZetaWinnerStrategy();
+        return new ZetaWinnerStrategy(); //zetaWinnerStrategy;
     }
 
     @Override

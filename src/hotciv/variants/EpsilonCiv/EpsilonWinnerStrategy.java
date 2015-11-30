@@ -31,4 +31,9 @@ public class EpsilonWinnerStrategy implements WinnerStrategy {
             playerWinCount.replace(player, currentWins + 1);
         } else playerWinCount.put(player, 1);
     }
+
+    @Override
+    public void incrementRoundCounter() {
+        // not used
+    }
 }
