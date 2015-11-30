@@ -47,7 +47,7 @@ public class GameImpl implements Game {
     private CityImpl city2;
 
     //Factory
-    private Factory factory;
+    public Factory factory;
 
     public GameImpl(Factory factory){
         this.factory = factory;
@@ -151,10 +151,13 @@ public class GameImpl implements Game {
     }
 
     public void endOfTurn() {
-        if(currentPlayerInTurn == Player.BLUE){
+        if (factory.getWinnerStrategy().calcWinner(this) == null) {
+            //Stop game
+        }
+        if (currentPlayerInTurn == Player.BLUE) {
             configureNewRound();
             currentPlayerInTurn = Player.RED;
-        }else currentPlayerInTurn = Player.BLUE;
+        } else currentPlayerInTurn = Player.BLUE;
     }
 
     public void changeWorkForceFocusInCityAt( Position p, String balance ) {

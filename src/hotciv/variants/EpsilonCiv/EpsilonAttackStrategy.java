@@ -8,6 +8,7 @@ import hotciv.standard.GameImpl;
 import hotciv.standard.UnitImpl;
 import hotciv.standard.Utility;
 
+import java.util.HashMap;
 import java.util.Random;
 
 /**
@@ -45,10 +46,13 @@ public class EpsilonAttackStrategy implements AttackInterface {
         attackStrength *= die.rollDie();
         defenseStrength *= die.rollDie();
 
+
         if(attackStrength > defenseStrength){
+            //Add increment on win count
+            Player winner = game.getUnitAt(from).getOwner();
+            game.factory.getWinnerStrategy().upDateWinCount(winner);
             return true;
         }
-
         return false;
     }
 

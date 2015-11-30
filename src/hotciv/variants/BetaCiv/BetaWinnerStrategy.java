@@ -4,6 +4,7 @@ import hotciv.framework.*;
 import hotciv.standard.CityImpl;
 import hotciv.standard.GameImpl;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -11,6 +12,7 @@ import java.util.Map;
  */
 public class BetaWinnerStrategy implements WinnerStrategy{
     Player firstCityOwner;
+   static private HashMap<Player, Integer> playerWinCount = new HashMap<>();
 
     @Override
     public Player calcWinner(GameImpl game) {
@@ -26,5 +28,13 @@ public class BetaWinnerStrategy implements WinnerStrategy{
             }else return null;
         }
         return firstCityOwner;
+    }
+
+    @Override
+    public void upDateWinCount(Player player) {
+        if (playerWinCount.containsKey(player)){
+            int currentWins = playerWinCount.get(player);
+            playerWinCount.replace(player, currentWins+1);
+        } else playerWinCount.put(player, 1);
     }
 }

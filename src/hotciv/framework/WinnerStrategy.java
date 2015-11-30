@@ -14,5 +14,6 @@ public interface WinnerStrategy {
      @param all cities in list
      @return winner or null if no one have won the game yet
      */
-    public Player calcWinner(GameImpl game);
+    Player calcWinner(GameImpl game);
+    void upDateWinCount(Player player);
 }
