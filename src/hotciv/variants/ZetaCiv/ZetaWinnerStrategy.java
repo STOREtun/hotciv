@@ -11,7 +11,7 @@ import java.util.HashMap;
  */
 public class ZetaWinnerStrategy implements WinnerStrategy {
     private int roundCount = 0;
-    private HashMap<Player, Integer> playerWinCount = new HashMap<>();
+    static private HashMap<Player, Integer> playerWinCount = new HashMap<>();
 
     @Override
     public Player calcWinner(GameImpl game) {
@@ -20,6 +20,9 @@ public class ZetaWinnerStrategy implements WinnerStrategy {
 
     @Override
     public void upDateWinCount(Player player) {
-
+        if (playerWinCount.containsKey(player)){
+            int currentWins = playerWinCount.get(player);
+            playerWinCount.replace(player, currentWins+1);
+        } else playerWinCount.put(player, 1);
     }
 }

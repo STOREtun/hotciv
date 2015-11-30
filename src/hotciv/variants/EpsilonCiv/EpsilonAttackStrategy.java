@@ -48,9 +48,6 @@ public class EpsilonAttackStrategy implements AttackInterface {
 
 
         if(attackStrength > defenseStrength){
-            //Add increment on win count
-            Player winner = game.getUnitAt(from).getOwner();
-            game.factory.getWinnerStrategy().upDateWinCount(winner);
             return true;
         }
         return false;

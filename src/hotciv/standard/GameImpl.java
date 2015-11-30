@@ -130,6 +130,8 @@ public class GameImpl implements Game {
             boolean enemyUnitPresentOnDestinationTile = !positionUnitMap.get(to).getOwner().equals(currentPlayerInTurn);
             if (enemyUnitPresentOnDestinationTile){
                if(factory.getAttackStrategy().attackSuccessful(from, to, this)){
+                   Player winner = getUnitAt(from).getOwner();
+                   factory.getWinnerStrategy().upDateWinCount(winner);
                    positionUnitMap.replace(to, movingUnit); // kill and replace the unit
                    positionUnitMap.remove(from);
                    return true;
@@ -151,9 +153,6 @@ public class GameImpl implements Game {
     }
 
     public void endOfTurn() {
-        if (factory.getWinnerStrategy().calcWinner(this) == null) {
-            //Stop game
-        }
         if (currentPlayerInTurn == Player.BLUE) {
             configureNewRound();
             currentPlayerInTurn = Player.RED;

@@ -15,8 +15,6 @@ public class AlphaAttackStrategy implements AttackInterface {
 
     @Override
     public boolean attackSuccessful(Position from, Position to, GameImpl game) {
-        Player winner = game.getUnitAt(from).getOwner();
-        game.factory.getWinnerStrategy().upDateWinCount(winner);
         return true;
     }
 }

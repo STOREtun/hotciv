@@ -12,7 +12,6 @@ import java.util.Map;
  */
 public class BetaWinnerStrategy implements WinnerStrategy{
     Player firstCityOwner;
-   static private HashMap<Player, Integer> playerWinCount = new HashMap<>();
 
     @Override
     public Player calcWinner(GameImpl game) {
@@ -32,9 +31,5 @@ public class BetaWinnerStrategy implements WinnerStrategy{
 
     @Override
     public void upDateWinCount(Player player) {
-        if (playerWinCount.containsKey(player)){
-            int currentWins = playerWinCount.get(player);
-            playerWinCount.replace(player, currentWins+1);
-        } else playerWinCount.put(player, 1);
     }
 }
