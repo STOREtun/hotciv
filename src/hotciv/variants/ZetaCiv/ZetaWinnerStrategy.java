@@ -20,8 +20,6 @@ public class ZetaWinnerStrategy implements WinnerStrategy {
 
     public ZetaWinnerStrategy() {
         this.twentyRoundsHasPassed = false;
-        roundCounter = 0;
-
         epsilonWinnerStrategy = new EpsilonWinnerStrategy();
         betaWinnerStrategy = new BetaWinnerStrategy();
     }
@@ -45,7 +43,6 @@ public class ZetaWinnerStrategy implements WinnerStrategy {
     @Override
     public void updateWinCount(Player player) {
         checkIfTwentyRoundsHavePassed();
-
         if(twentyRoundsHasPassed) epsilonWinnerStrategy.updateWinCount(player);
     }
 
