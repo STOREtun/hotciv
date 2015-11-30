@@ -15,5 +15,6 @@ public interface WinnerStrategy {
      @return winner or null if no one have won the game yet
      */
     Player calcWinner(GameImpl game);
-    void upDateWinCount(Player player);
+
+    void updateWinCount(Player player);
 }

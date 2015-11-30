@@ -1,4 +1,4 @@
-package hotciv.variants;
+package hotciv.TestStubs;
 
 import hotciv.framework.Die;
 

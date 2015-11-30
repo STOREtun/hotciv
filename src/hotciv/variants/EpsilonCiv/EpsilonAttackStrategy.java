@@ -24,7 +24,6 @@ public class EpsilonAttackStrategy implements AttackInterface {
 
     @Override
     public boolean attackSuccessful(Position from, Position to, GameImpl game) {
-
         UnitImpl attackingUnit = (UnitImpl) game.getUnitAt(from);
         UnitImpl defendingUnit = (UnitImpl) game.getUnitAt(to);
 

@@ -6,11 +6,9 @@ import hotciv.framework.Position;
 import hotciv.standard.GameImpl;
 import hotciv.standard.UnitImpl;
 import hotciv.variants.EpsilonCiv.EpsilonFactory;
-import hotciv.variants.FakeDie;
+import hotciv.TestStubs.FakeDie;
 import org.junit.Before;
 import org.junit.Test;
-
-import java.util.HashMap;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;

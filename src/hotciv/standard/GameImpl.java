@@ -1,7 +1,6 @@
 package hotciv.standard;
 
 import hotciv.framework.*;
-import hotciv.variants.RandomDie;
 
 import java.util.*;
 
@@ -127,11 +126,16 @@ public class GameImpl implements Game {
                 return true;
             }
 
+            /*
+             * Instead of calling .updateWinCount(winner) we could call calcWinner directly.
+             * That would also open a possibility to stop the game instantly when a player
+             * wins.
+            */
             boolean enemyUnitPresentOnDestinationTile = !positionUnitMap.get(to).getOwner().equals(currentPlayerInTurn);
             if (enemyUnitPresentOnDestinationTile){
                if(factory.getAttackStrategy().attackSuccessful(from, to, this)){
                    Player winner = getUnitAt(from).getOwner();
-                   factory.getWinnerStrategy().upDateWinCount(winner);
+                   factory.getWinnerStrategy().updateWinCount(winner);
                    positionUnitMap.replace(to, movingUnit); // kill and replace the unit
                    positionUnitMap.remove(from);
                    return true;

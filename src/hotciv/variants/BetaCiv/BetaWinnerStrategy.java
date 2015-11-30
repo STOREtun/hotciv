@@ -30,6 +30,6 @@ public class BetaWinnerStrategy implements WinnerStrategy{
     }
 
     @Override
-    public void upDateWinCount(Player player) {
+    public void updateWinCount(Player player) {
     }
 }

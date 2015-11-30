@@ -15,19 +15,20 @@ public class EpsilonWinnerStrategy implements WinnerStrategy {
 
     @Override
     public Player calcWinner(GameImpl game) {
-      if (playerWinCount.containsKey(Player.BLUE) && playerWinCount.get(Player.BLUE) >= 3){
+        if (playerWinCount.containsKey(Player.BLUE) && playerWinCount.get(Player.BLUE) >= 3){
           return Player.BLUE;
-      }
-        if (playerWinCount.containsKey(Player.RED) && playerWinCount.get(Player.RED) >= 3){
+        }else if (playerWinCount.containsKey(Player.RED) && playerWinCount.get(Player.RED) >= 3){
             return Player.RED;
-        } else return null;
+        }
+
+        return null;
     }
 
     @Override
-    public void upDateWinCount(Player player) {
+    public void updateWinCount(Player player) {
         if (playerWinCount.containsKey(player)){
             int currentWins = playerWinCount.get(player);
-            playerWinCount.replace(player, currentWins+1);
+            playerWinCount.replace(player, currentWins + 1);
         } else playerWinCount.put(player, 1);
     }
 }

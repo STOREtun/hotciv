@@ -20,6 +20,6 @@ public class AlphaWinnerStrategy implements WinnerStrategy{
     }
 
     @Override
-    public void upDateWinCount(Player player) {
+    public void updateWinCount(Player player) {
     }
 }
