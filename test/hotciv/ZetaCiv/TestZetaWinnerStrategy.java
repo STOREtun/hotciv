@@ -6,7 +6,6 @@ import hotciv.framework.Position;
 import hotciv.standard.GameImpl;
 import hotciv.standard.UnitImpl;
 import hotciv.variants.ZetaCiv.ZetaFactory;
-import hotciv.variants.ZetaCiv.ZetaWinnerStrategy;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -29,6 +28,12 @@ public class TestZetaWinnerStrategy {
 
     @Test
     public void shouldUseEpsilonStrategyIfMoreThan20RoundsHasPassed() {
+        UnitImpl redArcher_00 = new UnitImpl(Player.RED, GameConstants.ARCHER);
+        UnitImpl blueLegion_00 = new UnitImpl(Player.BLUE, GameConstants.LEGION);
+        game.positionUnitMap.put(new Position(16, 15), redArcher_00);
+        game.positionUnitMap.put(new Position(16, 16), blueLegion_00);
+        game.moveUnit(new Position(16,15), new Position(16, 16));
+
         for(int x = 0; x <= 19; x++) game.configureNewRound(); // passing 20 rounds
 
         assertThat("World age is now -2000. Meaning 20 rounds passed in alphaAgingStrategy terms",
@@ -59,7 +64,6 @@ public class TestZetaWinnerStrategy {
 
     @Test
     public void shouldUseBetaStrategyIfLessThan20RoundsHasPassed() {
-        GameImpl game = new GameImpl(new ZetaFactory());
         assertNull(game.getWinner()); // no winner yet
 
         assertThat("Owner is initial blue", game.getCityAt(new Position(4,1)).getOwner(), is(Player.BLUE));
