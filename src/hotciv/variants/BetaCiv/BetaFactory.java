@@ -30,7 +30,7 @@ public class BetaFactory implements Factory {
     }
 
     @Override
-    public AttackInterface getAttackStrategy() {
+    public AttackStrategy getAttackStrategy() {
         return new AlphaAttackStrategy();
     }
 }

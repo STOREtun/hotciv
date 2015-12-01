@@ -31,7 +31,7 @@ public class ZetaFactory implements Factory {
     }
 
     @Override
-    public AttackInterface getAttackStrategy() {
+    public AttackStrategy getAttackStrategy() {
         return new AlphaAttackStrategy();
     }
 }

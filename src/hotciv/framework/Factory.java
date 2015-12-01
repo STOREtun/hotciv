@@ -16,5 +16,5 @@ public interface Factory {
 
     UnitActionStrategy getUnitActionStrategy();
 
-    AttackInterface getAttackStrategy();
+    AttackStrategy getAttackStrategy();
 }

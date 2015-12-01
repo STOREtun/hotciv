@@ -52,7 +52,7 @@ public class GameImpl implements Game {
     public UnitActionStrategy unitActionStrategy;
     public WorldAgingStrategy worldAgingStrategy;
     public WorldMapStrategy worldMapStrategy;
-    public AttackInterface attackStrategy;
+    public AttackStrategy attackStrategy;
 
     public GameImpl(Factory factory){
         //Setup factory imle
