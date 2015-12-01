@@ -11,6 +11,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
@@ -43,6 +44,8 @@ public class TestEpsilonCivWinnerCalculation {
 
     @Test
     public void shouldCalculateWinnerAccordingToWonAttacks() {
+        assertNull(game.getWinner());
+
         // first attack results in redArcher taking over settler_01's tile
         assertTrue(game.moveUnit(new Position(10,10), new Position(11, 10)));
         assertThat("This unit is a red archer", game.getUnitAt(new Position(11, 10)).getOwner(), is(Player.RED));
