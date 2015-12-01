@@ -1,6 +1,6 @@
 package hotciv.variants.EpsilonCiv;
 
-import hotciv.framework.AttackInterface;
+import hotciv.framework.AttackStrategy;
 import hotciv.framework.Die;
 import hotciv.framework.Player;
 import hotciv.framework.Position;
@@ -8,13 +8,10 @@ import hotciv.standard.GameImpl;
 import hotciv.standard.UnitImpl;
 import hotciv.standard.Utility;
 
-import java.util.HashMap;
-import java.util.Random;
-
 /**
  * Created by asger on 25/11/15.
  */
-public class EpsilonAttackStrategy implements AttackInterface {
+public class EpsilonAttackStrategy implements AttackStrategy {
 
     private Die die;
 

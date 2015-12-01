@@ -11,7 +11,7 @@ import java.util.HashMap;
  */
 public class EpsilonWinnerStrategy implements WinnerStrategy {
 
-    static private HashMap<Player, Integer> playerWinCount = new HashMap<>();
+    private HashMap<Player, Integer> playerWinCount = new HashMap<>();
 
     @Override
     public Player calcWinner(GameImpl game) {

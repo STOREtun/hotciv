@@ -48,9 +48,21 @@ public class GameImpl implements Game {
 
     //Factory
     public Factory factory;
+    public WinnerStrategy winnerStrategy;
+    public UnitActionStrategy unitActionStrategy;
+    public WorldAgingStrategy worldAgingStrategy;
+    public WorldMapStrategy worldMapStrategy;
+    public AttackStrategy attackStrategy;
 
     public GameImpl(Factory factory){
+        //Setup factory imle
         this.factory = factory;
+        winnerStrategy = factory.getWinnerStrategy();
+        unitActionStrategy = factory.getUnitActionStrategy();
+        worldAgingStrategy = factory.getWorldAgingStrategy();
+        worldMapStrategy = factory.getWorldMapStrategy();
+        attackStrategy = factory.getAttackStrategy();
+
         currentPlayerInTurn = Player.RED;
         worldAge = -4000;
         roundCount = 0;
@@ -62,7 +74,7 @@ public class GameImpl implements Game {
         //Create hash maps of units
         positionUnitMap = new HashMap<Position, UnitImpl>();
         positionCityMap = new HashMap<Position, CityImpl>();
-        positionSpecialTileMap = factory.getWorldMapStrategy().getWorldLayout();
+        positionSpecialTileMap = worldMapStrategy.getWorldLayout();
 
         //Create units
         UnitImpl blueLegion = new UnitImpl(Player.BLUE, GameConstants.LEGION);
@@ -99,7 +111,7 @@ public class GameImpl implements Game {
 
     /* Could be called after city takeover */
     public Player getWinner() {
-        return factory.getWinnerStrategy().calcWinner(this);
+        return winnerStrategy.calcWinner(this);
     }
 
     public int getAge() {
@@ -135,9 +147,9 @@ public class GameImpl implements Game {
             */
             boolean enemyUnitPresentOnDestinationTile = !positionUnitMap.get(to).getOwner().equals(currentPlayerInTurn);
             if (enemyUnitPresentOnDestinationTile){
-               if(factory.getAttackStrategy().attackSuccessful(from, to, this)){
+               if(attackStrategy.attackSuccessful(from, to, this)){
                    Player winner = getUnitAt(from).getOwner();
-                   factory.getWinnerStrategy().updateWinCount(winner, roundCount);
+                   winnerStrategy.updateWinCount(winner, roundCount);
                    positionUnitMap.replace(to, movingUnit); // kill and replace the unit
                    positionUnitMap.remove(from);
                    return true;
@@ -174,7 +186,7 @@ public class GameImpl implements Game {
     }
 
     public void performUnitActionAt( Position p ) {
-        factory.getUnitActionStrategy().doUnitAction(this, p);
+        unitActionStrategy.doUnitAction(this, p);
     }
 
     public void configureNewRound(){
@@ -198,7 +210,7 @@ public class GameImpl implements Game {
             } /* else alert player that there is no room for new units */
         }
 
-        worldAge = factory.getWorldAgingStrategy().calcWorldAge(worldAge);
+        worldAge = worldAgingStrategy.calcWorldAge(worldAge);
         roundCount = roundCount + 1;
     }
 

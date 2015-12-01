@@ -41,7 +41,7 @@ public class EpsilonFactory implements Factory {
     }
 
     @Override
-    public AttackInterface getAttackStrategy() {
+    public AttackStrategy getAttackStrategy() {
         return new EpsilonAttackStrategy(die);
     }
 }

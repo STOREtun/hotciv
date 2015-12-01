@@ -6,8 +6,6 @@ import hotciv.standard.GameImpl;
 import hotciv.variants.BetaCiv.BetaWinnerStrategy;
 import hotciv.variants.EpsilonCiv.EpsilonWinnerStrategy;
 
-import java.util.HashMap;
-
 /**
  * Created by sditlev on 30/11/15.
  */
