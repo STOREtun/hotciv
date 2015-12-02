@@ -97,7 +97,7 @@ public class GameImpl implements Game {
         } else return new TileImpl(GameConstants.PLAINS);
     }
 
-    public Unit getUnitAt( Position p ) {
+    public UnitImpl getUnitAt( Position p ) {
         return positionUnitMap.get(p);
     }
 
@@ -190,24 +190,17 @@ public class GameImpl implements Game {
     }
 
     public void configureNewRound(){
-        city1.incrementProductionPoints();
-        if (city1.getProduction() != null && city1.getProductionPoints() >= 12){
-            Position firstEmptyTile = checkAdjacentTilesForUnit(new Position(1,1));
-            if (firstEmptyTile != null) {
-                UnitImpl unitProduced = new UnitImpl(city1.getOwner(), city1.getProduction());
-                positionUnitMap.put(firstEmptyTile, unitProduced);
-                city1.endProduction();
-            } /* else alert player that there is no room for new units */
-        }
-
-        city2.incrementProductionPoints();
-        if (city2.getProduction() != null && city2.getProductionPoints() >= 12){
-            Position firstEmptyTile = checkAdjacentTilesForUnit(new Position(4,1));
-            if (firstEmptyTile != null) {
-                UnitImpl unitProduced = new UnitImpl(city2.getOwner(), city2.getProduction());
-                positionUnitMap.put(firstEmptyTile, unitProduced);
-                city2.endProduction();
-            } /* else alert player that there is no room for new units */
+        for (HashMap.Entry<Position, CityImpl> entry : positionCityMap.entrySet()){
+            CityImpl city = entry.getValue();
+            city.incrementProductionPoints();
+            if (city.canProduceUnit()){
+                Position firstEmptyTile = checkAdjacentTilesForUnit(entry.getKey());
+                if (firstEmptyTile != null) {
+                    UnitImpl unitProduced = new UnitImpl(city.getOwner(), city.getUnitInProduction());
+                    positionUnitMap.put(firstEmptyTile, unitProduced);
+                    city.endProduction();
+                } /* else alert player that there is no room for new units */
+            }
         }
 
         worldAge = worldAgingStrategy.calcWorldAge(worldAge);

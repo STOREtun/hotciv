@@ -13,6 +13,7 @@ public class UnitImpl implements Unit {
 
     private int defensiveStrength;
     private int attackingStrength;
+    private int moveLength;
     private int cost;
 
     private boolean movable;
@@ -27,18 +28,28 @@ public class UnitImpl implements Unit {
                 defensiveStrength = 3;
                 attackingStrength = 2;
                 cost = 10;
+                moveLength = 1;
                 break;
 
             case "settler":
                 defensiveStrength = 3;
                 attackingStrength = 0;
                 cost = 30;
+                moveLength = 1;
                 break;
 
             case "legion":
                 attackingStrength = 4;
                 defensiveStrength = 2;
                 cost = 15;
+                moveLength = 1;
+                break;
+
+            case "chariot":
+                attackingStrength = 3;
+                defensiveStrength = 1;
+                cost = 20;
+                moveLength = 1;
                 break;
         }
 
@@ -73,7 +84,15 @@ public class UnitImpl implements Unit {
         return movable;
     }
 
-    public void archerFortifyAction(){
+    public int getMoveLength(){
+        return moveLength;
+    }
+
+    public int getCost(){
+        return cost;
+    }
+
+    public void fortifyAction(){
         if (!movable) {
             defensiveStrength = defensiveStrength / 2;
         } else {

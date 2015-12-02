@@ -45,7 +45,7 @@ public interface City {
    * @return a string type defining the unit under production,
    * see GameConstants for valid values.
    */
-  public String getProduction();
+  public String getUnitInProduction();
 
   /** return the work force's focus in this city.
    * @return a string type defining the focus, see GameConstants

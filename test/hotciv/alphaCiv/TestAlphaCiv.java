@@ -222,7 +222,7 @@ public class TestAlphaCiv {
     public void shouldSetAndGetProductionFromCity() {
         CityImpl city = game.getCityAt(new Position(4,1));
         game.changeProductionInCityAt(new Position(4, 1), GameConstants.ARCHER);
-        assertThat("Should be producing archer", city.getProduction(), is(GameConstants.ARCHER));
+        assertThat("Should be producing archer", city.getUnitInProduction(), is(GameConstants.ARCHER));
     }
 
     @Test
@@ -233,9 +233,10 @@ public class TestAlphaCiv {
         game.changeProductionInCityAt(new Position(4, 1), GameConstants.ARCHER);
         game.changeProductionInCityAt(new Position(1, 1), GameConstants.ARCHER);
 
+
         game.endOfTurn();
         game.endOfTurn(); // ending round
-
+        System.out.println("points: " + game.getCityAt(new Position(4, 1)).getProductionPoints());
         // the unit is not created yet due to low production points
         assertNull(game.getUnitAt(new Position(4, 1)));
 
@@ -247,9 +248,9 @@ public class TestAlphaCiv {
 
         // both cities have spent all their production points
         assertThat("production points is 0 after new unit is created",
-                game.getCityAt(new Position(4,1)).getProductionPoints(), is(0));
+                game.getCityAt(new Position(4,1)).getProductionPoints(), is(2));
         assertThat("production points is 0 after new unit is created",
-                game.getCityAt(new Position(1,1)).getProductionPoints(), is(0));
+                game.getCityAt(new Position(1,1)).getProductionPoints(), is(2));
     }
 
     @Test
@@ -263,9 +264,9 @@ public class TestAlphaCiv {
         game.endOfTurn();
         game.endOfTurn(); // accumulating 12 production points by ending round twice
 
-        assertThat("The production points are >= 12",
+        assertThat("The production points are >= 28",
                 game.getCityAt(new Position(1, 1)).getProductionPoints(),
-                is(12));
+                is(28));
     }
 
     public void produce9Units(){

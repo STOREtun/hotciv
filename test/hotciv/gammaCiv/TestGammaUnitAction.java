@@ -30,7 +30,7 @@ public class TestGammaUnitAction {
         UnitImpl archer = (UnitImpl) game.getUnitAt(new Position(2, 0));
         int defensiveStrength = archer.getDefensiveStrength();
         assertThat("No defensive strength to start with", defensiveStrength, is(3));
-        archer.archerFortifyAction();
+        archer.fortifyAction();
         assertThat("DefensiveStrength is double", archer.getDefensiveStrength(), is(6));
     }
 
