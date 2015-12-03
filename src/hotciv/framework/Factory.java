@@ -1,5 +1,6 @@
 package hotciv.framework;
 
+
 /**
  * Created by sditlev on 23/11/15.
  *
@@ -17,4 +18,6 @@ public interface Factory {
     UnitActionStrategy getUnitActionStrategy();
 
     AttackStrategy getAttackStrategy();
+
+    CityFactory getCityFactory();
 }

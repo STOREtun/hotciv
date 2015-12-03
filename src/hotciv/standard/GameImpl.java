@@ -55,7 +55,7 @@ public class GameImpl implements Game {
     public AttackStrategy attackStrategy;
 
     public GameImpl(Factory factory){
-        //Setup factory imle
+        //Setup factory impl
         this.factory = factory;
         winnerStrategy = factory.getWinnerStrategy();
         unitActionStrategy = factory.getUnitActionStrategy();
@@ -68,8 +68,8 @@ public class GameImpl implements Game {
         roundCount = 0;
 
         //Create cities
-        city1 = new CityImpl(Player.RED);
-        city2 = new CityImpl(Player.BLUE);
+        city1 = new CityImpl(Player.RED, factory.getCityFactory());
+        city2 = new CityImpl(Player.BLUE, factory.getCityFactory());
 
         //Create hash maps of units
         positionUnitMap = new HashMap<Position, UnitImpl>();
@@ -177,8 +177,8 @@ public class GameImpl implements Game {
         } else currentPlayerInTurn = Player.BLUE;
     }
 
-    public void changeWorkForceFocusInCityAt( Position p, String balance ) {
-
+    public void changeWorkForceFocusInCityAt(Position p, String balance) {
+        getCityAt(p).setWorkforceFocus(balance);
     }
 
     public void changeProductionInCityAt( Position p, String unitType ) {
@@ -190,9 +190,11 @@ public class GameImpl implements Game {
     }
 
     public void configureNewRound(){
+        // go through city map to perform 'end-of-round' actions on cities
         for (HashMap.Entry<Position, CityImpl> entry : positionCityMap.entrySet()){
             CityImpl city = entry.getValue();
             city.incrementProductionPoints();
+
             if (city.canProduceUnit()){
                 Position firstEmptyTile = checkAdjacentTilesForUnit(entry.getKey());
                 if (firstEmptyTile != null) {

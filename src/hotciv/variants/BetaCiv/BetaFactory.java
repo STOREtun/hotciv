@@ -33,4 +33,9 @@ public class BetaFactory implements Factory {
     public AttackStrategy getAttackStrategy() {
         return new AlphaAttackStrategy();
     }
+
+    @Override
+    public CityFactory getCityFactory() {
+        return null;
+    }
 }

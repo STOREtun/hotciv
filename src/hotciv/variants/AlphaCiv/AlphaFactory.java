@@ -1,6 +1,7 @@
 package hotciv.variants.AlphaCiv;
 
 import hotciv.framework.*;
+import hotciv.variants.AlphaCiv.CityStrategies.AlphaCityFactory;
 
 /**
  * Created by sditlev on 23/11/15.
@@ -29,4 +30,10 @@ public class AlphaFactory implements Factory {
     public AttackStrategy getAttackStrategy() {
         return new AlphaAttackStrategy();
     }
+
+    @Override
+    public CityFactory getCityFactory() {
+        return new AlphaCityFactory();
+    }
+
 }

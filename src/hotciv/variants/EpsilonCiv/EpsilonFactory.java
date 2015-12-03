@@ -44,4 +44,10 @@ public class EpsilonFactory implements Factory {
     public AttackStrategy getAttackStrategy() {
         return new EpsilonAttackStrategy(die);
     }
+
+    @Override
+    public CityFactory getCityFactory() {
+        return null;
+    }
+
 }

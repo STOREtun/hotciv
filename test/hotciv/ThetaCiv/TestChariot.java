@@ -5,6 +5,7 @@ import hotciv.framework.Position;
 import hotciv.standard.CityImpl;
 import hotciv.standard.GameImpl;
 import hotciv.variants.AlphaCiv.AlphaFactory;
+import hotciv.variants.ThetaCiv.ThetaFactory;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -19,7 +20,7 @@ public class TestChariot {
 
     @Before
     public void setup(){
-        game = new GameImpl(new AlphaFactory());
+        game = new GameImpl(new ThetaFactory());
         CityImpl city = game.getCityAt(new Position(4, 1));
         city.changeProduction(GameConstants.CHARIOT);
         game.endOfTurn();

@@ -4,6 +4,7 @@ import hotciv.framework.*;
 import hotciv.standard.CityImpl;
 import hotciv.standard.GameImpl;
 import hotciv.variants.AlphaCiv.AlphaFactory;
+import hotciv.variants.AlphaCiv.CityStrategies.AlphaCityFactory;
 import org.junit.*;
 
 import static org.junit.Assert.*;
@@ -99,7 +100,7 @@ public class TestAlphaCiv {
 
     @Test
     public void shouldProduceSixProductionAfterIncrement() {
-        CityImpl city1 = new CityImpl(Player.RED);
+        CityImpl city1 = new CityImpl(Player.RED, new AlphaCityFactory());
         assertThat("City production should be 0 at game start", city1.getProductionPoints(), is(0));
         city1.incrementProductionPoints();
         assertThat("City should produce six production after round end",city1.getProductionPoints(), is(6));

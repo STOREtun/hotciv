@@ -19,7 +19,7 @@ public class GammaUnitActionStrategy implements UnitActionStrategy{
         if (unitType.equals(GameConstants.ARCHER)){
             unitActor.fortifyAction();
         }else if (unitType.equals(GameConstants.SETTLER)){
-            CityImpl city = new CityImpl(unitActor.getOwner());
+            CityImpl city = new CityImpl(unitActor.getOwner(), game.factory.getCityFactory());
             game.positionUnitMap.remove(p);
             game.positionCityMap.put(p, city);
         }

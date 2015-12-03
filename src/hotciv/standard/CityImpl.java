@@ -1,6 +1,7 @@
 package hotciv.standard;
 
 import hotciv.framework.City;
+import hotciv.framework.CityFactory;
 import hotciv.framework.GameConstants;
 import hotciv.framework.Player;
 
@@ -11,15 +12,21 @@ import java.util.HashMap;
  */
 public class CityImpl implements City{
 
+    private CityFactory factory;
+
     private Player owner;
     private String unitInProduction;
     private int productionPoints;
+    private int size;
 
     private HashMap<String, Integer> unitCostMap;
 
-    public CityImpl(Player _owner) {
+    public CityImpl(Player _owner, CityFactory factory) {
         this.owner = _owner;
         this.productionPoints = 0;
+        this.factory = factory;
+        size = 0;
+
         unitCostMap = new HashMap<>();
         unitCostMap.put(GameConstants.CHARIOT, 20);
         unitCostMap.put(GameConstants.ARCHER, 10);
@@ -34,7 +41,7 @@ public class CityImpl implements City{
 
     @Override
     public int getSize() {
-        return 1;
+        return size;
     }
 
     @Override
@@ -44,7 +51,11 @@ public class CityImpl implements City{
 
     @Override
     public String getWorkforceFocus() {
-        return null;
+        return factory.getWorkforceFocusStrategy().getWorkforceFocus();
+    }
+
+    public void setWorkforceFocus(String newWorkforceFocus){
+        factory.getWorkforceFocusStrategy().setWorkforceFocus(newWorkforceFocus);
     }
 
     public int getProductionPoints(){
