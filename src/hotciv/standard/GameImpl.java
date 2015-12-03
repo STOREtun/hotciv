@@ -194,6 +194,7 @@ public class GameImpl implements Game {
         for (HashMap.Entry<Position, CityImpl> entry : positionCityMap.entrySet()){
             CityImpl city = entry.getValue();
             city.incrementProductionPoints();
+            city.growCityIfAccumulatedEnoughFood(getSurroundingTiles());
 
             if (city.canProduceUnit()){
                 Position firstEmptyTile = checkAdjacentTilesForUnit(entry.getKey());
@@ -236,5 +237,16 @@ public class GameImpl implements Game {
             if (!positionUnitMap.containsKey(pos)) return pos;
         }
         return null;
+    }
+
+    public List<String> getSurroundingTiles(){
+        List<String> tileList = new ArrayList<>();
+        Iterator<Position> list = Utility.get8NeighborhoodIterator(new Position(4,1));
+        while(list.hasNext()){
+            String typeString = getTileAt(list.next()).getTypeString();
+            tileList.add(typeString);
+        }
+
+        return tileList;
     }
 }

@@ -4,6 +4,7 @@ import hotciv.framework.*;
 import hotciv.variants.AlphaCiv.AlphaAttackStrategy;
 import hotciv.variants.AlphaCiv.AlphaUnitActionStrategy;
 import hotciv.variants.AlphaCiv.AlphaWorldStrategy;
+import hotciv.variants.AlphaCiv.CityStrategies.AlphaCityFactory;
 
 /**
  * Created by sditlev on 23/11/15.
@@ -36,6 +37,6 @@ public class BetaFactory implements Factory {
 
     @Override
     public CityFactory getCityFactory() {
-        return null;
+        return new AlphaCityFactory();
     }
 }

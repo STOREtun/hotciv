@@ -7,7 +7,7 @@ import hotciv.framework.PopulationStrategy;
  */
 public class AlphaCivPopulationStrategy implements PopulationStrategy {
     @Override
-    public int calcNewPopulation(int currentPopulation) {
-        return 1;
+    public int incrementPopulationIfAccumulatedEnoughFood(int currentPopulation, int currentFood) {
+        return 1; // always returns one
     }
 }

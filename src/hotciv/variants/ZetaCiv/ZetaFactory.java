@@ -5,6 +5,7 @@ import hotciv.variants.AlphaCiv.AlphaAgingStrategy;
 import hotciv.variants.AlphaCiv.AlphaAttackStrategy;
 import hotciv.variants.AlphaCiv.AlphaUnitActionStrategy;
 import hotciv.variants.AlphaCiv.AlphaWorldStrategy;
+import hotciv.variants.AlphaCiv.CityStrategies.AlphaCityFactory;
 
 /**
  * Created by asger on 30/11/15.
@@ -37,7 +38,7 @@ public class ZetaFactory implements Factory {
 
     @Override
     public CityFactory getCityFactory() {
-        return null;
+        return new AlphaCityFactory();
     }
 
 }

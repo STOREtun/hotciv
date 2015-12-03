@@ -5,7 +5,9 @@ import hotciv.framework.CityFactory;
 import hotciv.framework.GameConstants;
 import hotciv.framework.Player;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * Created by sditlev on 02/11/15.
@@ -16,22 +18,24 @@ public class CityImpl implements City{
 
     private Player owner;
     private String unitInProduction;
-    private int productionPoints;
-    private int size;
+    private int productionPoints, size, food;
 
-    private HashMap<String, Integer> unitCostMap;
+    private HashMap<String, Integer> unitCostMap, tilesWorkedMap;
 
     public CityImpl(Player _owner, CityFactory factory) {
         this.owner = _owner;
         this.productionPoints = 0;
         this.factory = factory;
-        size = 0;
+        size = 1;
+        food = 0;
 
         unitCostMap = new HashMap<>();
         unitCostMap.put(GameConstants.CHARIOT, 20);
         unitCostMap.put(GameConstants.ARCHER, 10);
         unitCostMap.put(GameConstants.LEGION, 15);
         unitCostMap.put(GameConstants.SETTLER, 20);
+
+        tilesWorkedMap = new HashMap<String, Integer>();
     }
 
     @Override
@@ -42,6 +46,22 @@ public class CityImpl implements City{
     @Override
     public int getSize() {
         return size;
+    }
+
+    /*
+    *  the idea is to maximize (depending on workforce focus) either
+    *  food or production from the surrounding 8 tiles.
+    *
+    *  as of now it just increments the population by one.
+    *  It should check if enough food have been accumulated before incrementing
+    */
+    public void growCityIfAccumulatedEnoughFood(List<String> surroundingTiles) {
+
+        size = factory.getPopulationStrategy().incrementPopulationIfAccumulatedEnoughFood(size, food);
+    }
+
+    public int getFood(){
+        return food;
     }
 
     @Override
