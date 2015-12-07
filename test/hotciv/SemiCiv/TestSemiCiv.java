@@ -33,6 +33,7 @@ public class TestSemiCiv {
 
     @Test
     public void shouldIncreasePopulationLikeEtaCiv() {
+
     }
 
     @Test
@@ -44,11 +45,11 @@ public class TestSemiCiv {
     public void shouldCollectFood() {
         System.out.println(getSurroundingTiles());
 
-//        CityImpl city = game.getCityAt(new Position(4, 1));
-//        assertThat("Population should be 1", city.getSize(), is(1));
-//        game.endOfTurn();
-//        game.endOfTurn();
-//        assertThat("Population should have incremented", city.getSize(), is(2));
+        CityImpl city = game.getCityAt(new Position(4, 1));
+        assertThat("Population should be 1", city.getSize(), is(1));
+        game.endOfTurn();
+        game.endOfTurn();
+        assertThat("Population should have incremented", city.getSize(), is(2));
     }
 
     public List<String> getSurroundingTiles(){

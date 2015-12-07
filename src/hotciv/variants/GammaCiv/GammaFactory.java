@@ -3,6 +3,7 @@ package hotciv.variants.GammaCiv;
 import hotciv.framework.*;
 import hotciv.variants.AlphaCiv.AlphaAttackStrategy;
 import hotciv.variants.AlphaCiv.AlphaWorldStrategy;
+import hotciv.variants.AlphaCiv.CityStrategies.AlphaCityFactory;
 import hotciv.variants.BetaCiv.BetaAgingStrategy;
 import hotciv.variants.BetaCiv.BetaWinnerStrategy;
 
@@ -37,6 +38,6 @@ public class GammaFactory implements Factory {
 
     @Override
     public CityFactory getCityFactory() {
-        return null;
+        return new AlphaCityFactory();
     }
 }

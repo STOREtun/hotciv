@@ -4,6 +4,7 @@ import hotciv.framework.*;
 import hotciv.variants.AlphaCiv.AlphaAgingStrategy;
 import hotciv.variants.AlphaCiv.AlphaUnitActionStrategy;
 import hotciv.variants.AlphaCiv.AlphaWorldStrategy;
+import hotciv.variants.AlphaCiv.CityStrategies.AlphaCityFactory;
 
 /**
  * Created by asger on 25/11/15.
@@ -47,7 +48,7 @@ public class EpsilonFactory implements Factory {
 
     @Override
     public CityFactory getCityFactory() {
-        return null;
+        return new AlphaCityFactory();
     }
 
 }

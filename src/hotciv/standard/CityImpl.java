@@ -1,9 +1,7 @@
 package hotciv.standard;
 
-import hotciv.framework.City;
-import hotciv.framework.CityFactory;
-import hotciv.framework.GameConstants;
-import hotciv.framework.Player;
+import hotciv.framework.*;
+import hotciv.variants.ThetaCiv.ThetaCivGameConstant;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,26 +12,34 @@ import java.util.List;
  */
 public class CityImpl implements City{
 
-    private CityFactory factory;
-
     private Player owner;
     private String unitInProduction;
     private int productionPoints, size, food;
+    private CityFactory cityFactory;
+    private PopulationStrategy populationStrategy;
+    private WorkforceFocusStrategy workforceFocusStrategy;
+
 
     private HashMap<String, Integer> unitCostMap, tilesWorkedMap;
 
     public CityImpl(Player _owner, CityFactory factory) {
         this.owner = _owner;
         this.productionPoints = 0;
-        this.factory = factory;
+
+        this.cityFactory = factory;
+        populationStrategy = cityFactory.getPopulationStrategy();
+        workforceFocusStrategy = cityFactory.getWorkforceFocusStrategy();
+
         size = 1;
         food = 0;
 
         unitCostMap = new HashMap<>();
-        unitCostMap.put(GameConstants.CHARIOT, 20);
+        unitCostMap.put(ThetaCivGameConstant.CHARIOT, 20);
         unitCostMap.put(GameConstants.ARCHER, 10);
         unitCostMap.put(GameConstants.LEGION, 15);
         unitCostMap.put(GameConstants.SETTLER, 20);
+
+
 
         tilesWorkedMap = new HashMap<String, Integer>();
     }
@@ -56,8 +62,7 @@ public class CityImpl implements City{
     *  It should check if enough food have been accumulated before incrementing
     */
     public void growCityIfAccumulatedEnoughFood(List<String> surroundingTiles) {
-
-        size = factory.getPopulationStrategy().incrementPopulationIfAccumulatedEnoughFood(size, food);
+        size = populationStrategy.incrementPopulationIfAccumulatedEnoughFood(size, food);
     }
 
     public int getFood(){
@@ -71,11 +76,11 @@ public class CityImpl implements City{
 
     @Override
     public String getWorkforceFocus() {
-        return factory.getWorkforceFocusStrategy().getWorkforceFocus();
+        return workforceFocusStrategy.getWorkforceFocus();
     }
 
     public void setWorkforceFocus(String newWorkforceFocus){
-        factory.getWorkforceFocusStrategy().setWorkforceFocus(newWorkforceFocus);
+        workforceFocusStrategy.setWorkforceFocus(newWorkforceFocus);
     }
 
     public int getProductionPoints(){

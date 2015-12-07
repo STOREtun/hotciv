@@ -10,7 +10,7 @@ import hotciv.framework.WorkforceFocusStrategy;
 public class SemiCivCityFactory implements CityFactory {
     @Override
     public WorkforceFocusStrategy getWorkforceFocusStrategy() {
-        return null;
+        return new SemiCivWorkforceFocusStrategy();
     }
 
     @Override

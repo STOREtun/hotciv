@@ -9,7 +9,7 @@ public class SemiCivPopulationStrategy implements PopulationStrategy {
 
     @Override
     public int incrementPopulationIfAccumulatedEnoughFood(int currentPopulation, int currentFood) {
-        if(5 + (currentFood) * 3 >= currentPopulation){
+        if(5 + (currentPopulation) * 3 >= currentFood){
             return currentPopulation + 1;
         }else return currentPopulation;
     }

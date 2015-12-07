@@ -5,6 +5,7 @@ import hotciv.framework.Position;
 import hotciv.standard.CityImpl;
 import hotciv.standard.GameImpl;
 import hotciv.variants.AlphaCiv.AlphaFactory;
+import hotciv.variants.ThetaCiv.ThetaCivGameConstant;
 import hotciv.variants.ThetaCiv.ThetaFactory;
 import org.junit.Before;
 import org.junit.Test;
@@ -22,7 +23,7 @@ public class TestChariot {
     public void setup(){
         game = new GameImpl(new ThetaFactory());
         CityImpl city = game.getCityAt(new Position(4, 1));
-        city.changeProduction(GameConstants.CHARIOT);
+        city.changeProduction(ThetaCivGameConstant.CHARIOT);
         game.endOfTurn();
         game.endOfTurn();
         game.endOfTurn();
@@ -35,7 +36,7 @@ public class TestChariot {
 
     @Test
     public void shouldProduceChariot() {
-        assertThat("Should have produced new unit", game.getUnitAt(new Position(4,1)).getTypeString(), is(GameConstants.CHARIOT));
+        assertThat("Should have produced new unit", game.getUnitAt(new Position(4,1)).getTypeString(), is(ThetaCivGameConstant.CHARIOT));
     }
 
     @Test

@@ -1,7 +1,7 @@
 package hotciv.variants.SemiCiv;
 
 import hotciv.framework.*;
-import hotciv.variants.AlphaCiv.AlphaAgingStrategy;
+import hotciv.variants.BetaCiv.BetaAgingStrategy;
 import hotciv.variants.DeltaCiv.DeltaWorldStrategy;
 import hotciv.variants.EpsilonCiv.EpsilonAttackStrategy;
 import hotciv.variants.EpsilonCiv.EpsilonWinnerStrategy;
@@ -20,7 +20,7 @@ public class SemiCivFactory implements Factory {
 
     @Override
     public WorldAgingStrategy getWorldAgingStrategy() {
-        return new AlphaAgingStrategy();
+        return new BetaAgingStrategy();
     }
 
     @Override
