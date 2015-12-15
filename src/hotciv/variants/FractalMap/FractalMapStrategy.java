@@ -4,6 +4,7 @@ import hotciv.framework.Position;
 import hotciv.framework.WorldMapStrategy;
 import hotciv.standard.TileImpl;
 
+import java.util.Arrays;
 import java.util.Map;
 
 import hotciv.standard.WorldMapGenerator;
@@ -14,11 +15,11 @@ import thirdparty.ThirdPartyFractalGenerator;
  */
 public class FractalMapStrategy implements WorldMapStrategy {
     ThirdPartyFractalGenerator fractalGenerator = new ThirdPartyFractalGenerator();
-    WorldMapGenerator mapGenrator = new WorldMapGenerator();
+    WorldMapGenerator mapGenerator = new WorldMapGenerator();
 
     public String[] fractalStringMapCall(){
         String line;
-        String[] layout =  new String[]{};
+        String[] layout =  new String[16];
 
         //Generate string array
         for ( int r = 0; r < 16; r++ ) {
@@ -33,6 +34,6 @@ public class FractalMapStrategy implements WorldMapStrategy {
 
     @Override
     public Map<Position, TileImpl> getWorldLayout() {
-        return mapGenrator.defineWorld(fractalStringMapCall());
+        return mapGenerator.defineWorld(fractalStringMapCall());
     }
 }
